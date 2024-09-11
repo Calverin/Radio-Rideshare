@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy5gwgs8wnr7o"]
+
+[ext_resource type="PackedScene" uid="uid://dxdjj04nuiv6f" path="res://Assets/Car/car_tire.gltf" id="1_77v5j"]
+
+[node name="Wheel" type="VehicleWheel3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Model" parent="." instance=ExtResource("1_77v5j")]

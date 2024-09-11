@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp3hb20j374vw"]
+[gd_scene load_steps=5 format=3 uid="uid://bp3hb20j374vw"]
 
-[ext_resource type="PackedScene" uid="uid://dphiyx3qmtajw" path="res://Scenes/player.tscn" id="1_ley1m"]
+[ext_resource type="PackedScene" uid="uid://c1klncb1e6jt8" path="res://Scenes/car.tscn" id="2_f441o"]
+[ext_resource type="Script" path="res://Scripts/ground.gd" id="2_kosd8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tn7p2"]
 size = Vector3(100, 0.1, 100)
@@ -18,10 +19,14 @@ offset_bottom = 40.0
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="Player" parent="World" instance=ExtResource("1_ley1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14562, 0)
-
 [node name="Ground" type="StaticBody3D" parent="World"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("2_kosd8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Ground"]
 shape = SubResource("BoxShape3D_tn7p2")
@@ -31,3 +36,7 @@ mesh = SubResource("BoxMesh_v43vu")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.46932, 0)
+omni_range = 24.755
+
+[node name="Car" parent="World" instance=ExtResource("2_f441o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
