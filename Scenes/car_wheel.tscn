@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dxdjj04nuiv6f" path="res://Assets/Car/car_tire.gltf" id="1_77v5j"]
 
-[node name="Wheel" type="VehicleWheel3D"]
+[node name="Wheel" type="MeshInstance3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Model" parent="." instance=ExtResource("1_77v5j")]

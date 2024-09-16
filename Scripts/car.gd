@@ -1,50 +1,35 @@
-extends VehicleBody3D
+extends CharacterBody3D
 
-const STEER_SPEED = 1.5
-const STEER_LIMIT = 0.4
-const BRAKE_STRENGTH = 2.0
+@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
+@export_enum("Local Road:1", "City Street:3", "Highway:5") var lanes: int
 
-@export var engine_force_value := 40.0
+var drifting: bool = false
+var drift_time: int = 0
+var drift_direction: String = ""
 
-var previous_speed := linear_velocity.length()
-var _steer_target := 0.0
+var current_lane: int = ceil(lanes/2)
 
 func _physics_process(delta: float):
-	var fwd_mps := (linear_velocity * transform.basis).x
+	
+	if Input.is_action_just_pressed("drift") and not drifting:
+		drifting = true
 
-	_steer_target = Input.get_axis("steer_right", "steer_left")
-	_steer_target *= STEER_LIMIT
-
-	if abs(linear_velocity.length() - previous_speed) > 1.0:
-		Input.vibrate_handheld(100)
-		for joypad in Input.get_connected_joypads():
-			Input.start_joy_vibration(joypad, 0.0, 0.5, 0.1)
-
-	if Input.is_action_pressed("accelerate"):
-		# Increase engine force at low speeds to make the initial acceleration faster.
-		var speed := linear_velocity.length()
-		if speed < 5.0 and not is_zero_approx(speed):
-			engine_force = clampf(engine_force_value * 5.0 / speed, 0.0, 100.0)
-		else:
-			engine_force = engine_force_value
-
-		#if not DisplayServer.is_touchscreen_available():
-			# Apply analog throttle factor for more subtle acceleration if not fully holding down the trigger.
-			#engine_force *= Input.get_action_strength("accelerate")
-	else:
-		engine_force = 0.0
-
-	if Input.is_action_pressed("reverse"):
-		# Increase engine force at low speeds to make the initial reversing faster.
-		var speed := linear_velocity.length()
-		if speed < 5.0 and not is_zero_approx(speed):
-			engine_force = -clampf(engine_force_value * BRAKE_STRENGTH * 5.0 / speed, 0.0, 100.0)
-		else:
-			engine_force = -engine_force_value * BRAKE_STRENGTH
-
-		# Apply analog brake factor for more subtle braking if not fully holding down the trigger.
-		engine_force *= Input.get_action_strength("reverse")
-
-	steering = move_toward(steering, _steer_target, STEER_SPEED * delta)
-
-	previous_speed = linear_velocity.length()
+	if drifting:
+		drift(delta)
+		
+	position.x = current_lane * 10
+	position.z -= speed * delta
+	
+func drift(delta: float):
+	var axis = Input.get_axis("steer_left", "steer_right")
+	drift_direction = "left" if axis < 0 else "right" if axis > 0 else ""
+	$Body.rotation.y = lerp($Body.rotation.y, axis * 90, delta)
+	if not Input.is_action_pressed("drift"):
+		drifting = false
+		switch_lane()
+		
+func switch_lane():
+	if drift_direction == "left" and current_lane > 1:
+		current_lane -= 1
+	if drift_direction == "right" and current_lane < lanes:
+		current_lane += 1

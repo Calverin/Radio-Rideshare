@@ -7,36 +7,33 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wcon"]
 size = Vector3(2.4, 1.9, 4.5)
 
-[node name="Car" type="VehicleBody3D"]
-center_of_mass_mode = 1
-center_of_mass = Vector3(0, -1, 0)
-can_sleep = false
-continuous_cd = true
+[node name="Car" type="CharacterBody3D"]
 script = ExtResource("1_oamc2")
+speed = 60
+lanes = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.449, 0.0500001)
 shape = SubResource("BoxShape3D_0wcon")
 
-[node name="Model" parent="." instance=ExtResource("1_aaytl")]
+[node name="Model" parent="Body" instance=ExtResource("1_aaytl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.449, -0.0500001)
 
-[node name="Wheel" parent="." instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.4, -1.375)
-use_as_traction = true
-use_as_steering = true
+[node name="Wheel" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, -1.049, -1.425)
+skeleton = NodePath("../..")
 
-[node name="Wheel2" parent="." instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.4, -1.375)
-use_as_traction = true
-use_as_steering = true
+[node name="Wheel2" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1.049, -1.425)
+skeleton = NodePath("../..")
 
-[node name="Wheel3" parent="." instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.4, 1.5)
-use_as_traction = true
+[node name="Wheel3" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, -1.049, 1.45)
+skeleton = NodePath("../..")
 
-[node name="Wheel4" parent="." instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.4, 1.5)
-use_as_traction = true
+[node name="Wheel4" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1.049, 1.45)
+skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 9.62921, 8.83538)
