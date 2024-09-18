@@ -13,7 +13,7 @@ speed = 60
 lanes = 3
 
 [node name="Body" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.449, 0.0500001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
 shape = SubResource("BoxShape3D_0wcon")
 
 [node name="Model" parent="Body" instance=ExtResource("1_aaytl")]
