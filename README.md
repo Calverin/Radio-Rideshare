@@ -1,5 +1,4 @@
 Radio Rideshare
-https://github.com/Calverin/Radio-Rideshare
 
 Idea: An imitative-control rhythm game. Main triggers on the controller or buttons on laptop being a connection to tapping the steering wheel, flipping the left and right turn signals, flipping the windshield wipers, etc.
 Example Controls: Left-Shift, S, D, Space, K, L, Right-Shift
