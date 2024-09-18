@@ -2,34 +2,51 @@ extends CharacterBody3D
 
 @export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
 @export_enum("Local Road:1", "City Street:3", "Highway:5") var lanes: int
+var current_lane: int
 
 var drifting: bool = false
 var drift_time: int = 0
-var drift_direction: String = ""
+var drift_direction: int = 0
 
-var current_lane: int = ceil(lanes/2)
+func _ready():
+	current_lane = ceilf(lanes / 2.0)
+	position.x = current_lane * 10
 
 func _physics_process(delta: float):
-	
+	## Drifting
 	if Input.is_action_just_pressed("drift") and not drifting:
 		drifting = true
-
+		drift_direction = 0
 	if drifting:
 		drift(delta)
-		
-	position.x = current_lane * 10
+	else:
+		$Body.rotation.y = lerpf($Body.rotation.y, 0, delta * 10)
+	
+	## Movement
+	position.x = lerpf(position.x, current_lane * 10, delta * 20)
+	$Body.position.y = lerpf($Body.position.y, 1.5, delta * 20)
 	position.z -= speed * delta
 	
 func drift(delta: float):
+	## Params
 	var axis = Input.get_axis("steer_left", "steer_right")
-	drift_direction = "left" if axis < 0 else "right" if axis > 0 else ""
-	$Body.rotation.y = lerp($Body.rotation.y, axis * 90, delta)
+	# -1 == left, 1 == right
+	drift_direction = -1 if axis < 0 else 1 if axis > 0 else drift_direction
+	drift_time += 1
+	
+	## VFX
+	$Body.rotation.y = lerpf($Body.rotation.y, -drift_direction, delta * 5)
+	# Early Drift "Hop"
+	if drift_time < 10:
+		$Body.position.y = lerpf($Body.position.y, 2.5, delta * 30)
+	## Ending
 	if not Input.is_action_pressed("drift"):
 		drifting = false
+		drift_time = 0
 		switch_lane()
 		
 func switch_lane():
-	if drift_direction == "left" and current_lane > 1:
+	if drift_direction == -1 and current_lane > 1:
 		current_lane -= 1
-	if drift_direction == "right" and current_lane < lanes:
+	if drift_direction == 1 and current_lane < lanes:
 		current_lane += 1
