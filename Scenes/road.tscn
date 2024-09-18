@@ -1,11 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://j3un3pk121r3"]
+[gd_scene load_steps=5 format=3 uid="uid://j3un3pk121r3"]
 
-[ext_resource type="Script" path="res://Scripts/testallroads.gd" id="1_s5d4o"]
+[ext_resource type="ArrayMesh" uid="uid://cmbfs75h46jtl" path="res://Assets/Roads/roadTile_027.obj" id="1_7j7x6"]
+[ext_resource type="ArrayMesh" uid="uid://h6ojg2mlw6p0" path="res://Assets/Roads/roadTile_058.obj" id="2_n70ai"]
+[ext_resource type="ArrayMesh" uid="uid://d1k017x4buxd8" path="res://Assets/Roads/roadTile_104.obj" id="3_e8yit"]
+[ext_resource type="ArrayMesh" uid="uid://c5lcmspsrf5bc" path="res://Assets/Roads/roadTile_109.obj" id="4_u54q5"]
 
 [node name="Road" type="Node3D"]
 
 [node name="GridMap" type="GridMap" parent="."]
+data = {
+"cells": PackedInt32Array(65532, 65535, 0, 65533, 1, 0, 65530, 65535, 0, 65530, 0, 0, 65529, 2, 0, 65529, 0, 0, 65528, 65535, 0, 65529, 65535, 0, 65528, 0, 0, 65528, 1, 0, 65528, 3, 0, 65530, 7, 0, 65531, 1, 0, 65531, 3, 0, 65530, 4, 0, 65528, 2, 0, 65528, 4, 0, 65528, 7, 0, 65528, 6, 0, 65529, 65533, 0, 65529, 65532, 0, 65530, 65531, 0, 65529, 65531, 0, 65528, 65534, 0, 65527, 0, 0, 65527, 3, 0, 65531, 65529, 0, 65532, 65531, 0, 65532, 65532, 0, 65528, 65532, 0)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.27583, 0, 7.1004)
-script = ExtResource("1_s5d4o")
+[node name="RoadTile027" type="MeshInstance3D" parent="GridMap"]
+mesh = ExtResource("1_7j7x6")
+skeleton = NodePath("../..")
+
+[node name="RoadTile058" type="MeshInstance3D" parent="GridMap"]
+mesh = ExtResource("2_n70ai")
+skeleton = NodePath("../..")
+
+[node name="RoadTile104" type="MeshInstance3D" parent="GridMap"]
+mesh = ExtResource("3_e8yit")
+skeleton = NodePath("../..")
+
+[node name="RoadTile109" type="MeshInstance3D" parent="GridMap"]
+mesh = ExtResource("4_u54q5")
+skeleton = NodePath("../..")
