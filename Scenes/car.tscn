@@ -10,7 +10,6 @@ size = Vector3(2.4, 1.9, 4.5)
 [node name="Car" type="CharacterBody3D"]
 script = ExtResource("1_oamc2")
 speed = 60
-lanes = 3
 
 [node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
@@ -36,6 +35,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1.
 skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 9.62921, 8.83538)
+transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 6.70486, 5.96559)
 current = true
 fov = 95.0

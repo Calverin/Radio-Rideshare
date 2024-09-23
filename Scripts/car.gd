@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
-@export_enum("Local Road:1", "City Street:3", "Highway:5") var lanes: int
+@onready var lanes: int = $"../Road".lane_count
 var current_lane: int
 
 var drifting: bool = false
