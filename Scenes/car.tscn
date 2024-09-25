@@ -11,30 +11,42 @@ size = Vector3(2.4, 1.9, 4.5)
 script = ExtResource("1_oamc2")
 speed = 60
 
-[node name="Body" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
-shape = SubResource("BoxShape3D_0wcon")
-
-[node name="Model" parent="Body" instance=ExtResource("1_aaytl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.449, -0.0500001)
-
-[node name="Wheel" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, -1.049, -1.425)
-skeleton = NodePath("../..")
-
-[node name="Wheel2" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1.049, -1.425)
-skeleton = NodePath("../..")
-
-[node name="Wheel3" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, -1.049, 1.45)
-skeleton = NodePath("../..")
-
-[node name="Wheel4" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, -1.049, 1.45)
-skeleton = NodePath("../..")
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 6.70486, 5.96559)
 current = true
 fov = 95.0
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Model" parent="Body" instance=ExtResource("1_aaytl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051, -1.00583e-07)
+
+[node name="Wheel" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.451, -1.375)
+skeleton = NodePath("../..")
+
+[node name="Wheel2" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, -1.375)
+skeleton = NodePath("../..")
+
+[node name="Wheel3" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.451, 1.5)
+skeleton = NodePath("../..")
+
+[node name="Wheel4" parent="Body" instance=ExtResource("2_igjln")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, 1.5)
+skeleton = NodePath("../..")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
+shape = SubResource("BoxShape3D_0wcon")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1.25, -2.5)
+light_color = Color(1, 1, 0.443137, 1)
+spot_range = 7.838
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1.25, -2.5)
+light_color = Color(1, 1, 0.443137, 1)
+spot_range = 7.838

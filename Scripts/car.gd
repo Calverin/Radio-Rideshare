@@ -20,7 +20,7 @@ func _physics_process(delta: float):
 	if drifting:
 		drift(delta)
 	else:
-		$Body.rotation.y = lerpf($Body.rotation.y, 0, delta * 6)
+		$Body.rotation.y = lerpf($Body.rotation.y, 0, delta * 8)
 		if Input.is_action_just_pressed("steer_left"):
 			$Body.rotation.y += 0.25
 			switch_lane(-1)
@@ -32,7 +32,7 @@ func _physics_process(delta: float):
 	
 	## Movement
 	position.x = lerpf(position.x, current_lane * 10, delta * 20)
-	$Body.position.y = lerpf($Body.position.y, 1.5, delta * 20)
+	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
 	position.z -= speed * delta
 	
 func drift(delta: float):
@@ -46,7 +46,7 @@ func drift(delta: float):
 	$Body.rotation.y = lerpf($Body.rotation.y, -drift_direction, delta * 5)
 	# Early Drift "Hop"
 	if drift_time < 10:
-		$Body.position.y = lerpf($Body.position.y, 2.5, delta * 30)
+		$Body.position.y = lerpf($Body.position.y, 1, delta * 30)
 	## Ending
 	if not Input.is_action_pressed("drift"):
 		drifting = false
