@@ -6,7 +6,7 @@ var current_lane: int
 
 var drifting: bool = false
 var drift_time: int = 0
-var drift_direction: int = 0
+var drift_direction: float = 0
 
 func _ready():
 	current_lane = ceilf(lanes / 2.0)
@@ -14,17 +14,20 @@ func _ready():
 
 func _physics_process(delta: float):
 	## Drifting
-	if Input.is_action_just_pressed("drift") and not drifting:
+	if Input.is_action_just_pressed("drift_left") and not drifting:
 		drifting = true
-		drift_direction = 0
+		drift_direction = -0.5
+	if Input.is_action_just_pressed("drift_right") and not drifting:
+		drifting = true
+		drift_direction = 0.5
 	if drifting:
 		drift(delta)
 	else:
 		$Body.rotation.y = lerpf($Body.rotation.y, 0, delta * 8)
-		if Input.is_action_just_pressed("steer_left"):
+		if Input.is_action_just_pressed("quick_left"):
 			$Body.rotation.y += 0.25
 			switch_lane(-1)
-		if Input.is_action_just_pressed("steer_right"):
+		if Input.is_action_just_pressed("quick_right"):
 			$Body.rotation.y -= 0.25
 			switch_lane(1)
 			
@@ -48,13 +51,13 @@ func drift(delta: float):
 	if drift_time < 10:
 		$Body.position.y = lerpf($Body.position.y, 1, delta * 30)
 	## Ending
-	if not Input.is_action_pressed("drift"):
+	if not (Input.is_action_pressed("drift_left") or Input.is_action_pressed("drift_right")):
 		drifting = false
 		drift_time = 0
 		switch_lane(drift_direction)
 		
 func switch_lane(dir):
-	if dir == -1 and current_lane > 1:
+	if dir < 0 and current_lane > 1:
 		current_lane -= 1
-	if dir == 1 and current_lane < lanes:
+	if dir > 0 and current_lane < lanes:
 		current_lane += 1
