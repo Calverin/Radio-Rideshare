@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp3hb20j374vw"]
+[gd_scene load_steps=7 format=3 uid="uid://bp3hb20j374vw"]
 
+[ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/skybox.exr" id="1_hh7ij"]
 [ext_resource type="PackedScene" uid="uid://j3un3pk121r3" path="res://Scenes/road.tscn" id="2_7cmc6"]
 [ext_resource type="PackedScene" uid="uid://c1klncb1e6jt8" path="res://Scenes/car.tscn" id="2_f441o"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ciel5"]
+panorama = ExtResource("1_hh7ij")
+
+[sub_resource type="Sky" id="Sky_3wipw"]
+sky_material = SubResource("PanoramaSkyMaterial_ciel5")
+
+[sub_resource type="Environment" id="Environment_a65qg"]
+background_mode = 2
+sky = SubResource("Sky_3wipw")
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="Root" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a65qg")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -15,10 +31,6 @@ offset_bottom = 40.0
 
 [node name="Car" parent="World" instance=ExtResource("2_f441o")]
 speed = 30
-
-[node name="OmniLight3D" type="OmniLight3D" parent="World/Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.46932, 0)
-omni_range = 24.755
 
 [node name="Road" parent="World" instance=ExtResource("2_7cmc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
