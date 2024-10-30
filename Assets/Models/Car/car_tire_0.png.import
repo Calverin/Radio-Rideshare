@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n705qg6hd6ob"
-path.bptc="res://.godot/imported/skybox.exr-d5c491e37770f2ed8d06de99062632ee.bptc.ctex"
+uid="uid://7qchdt1vddrg"
+path.s3tc="res://.godot/imported/car_tire_0.png-11c8a5f86ab7c78b02673e0a7b007c06.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "246570eb78493511116e3b7223132541"
+}
 
 [deps]
 
-source_file="res://Assets/skybox.exr"
-dest_files=["res://.godot/imported/skybox.exr-d5c491e37770f2ed8d06de99062632ee.bptc.ctex"]
+source_file="res://Assets/Models/Car/car_tire_0.png"
+dest_files=["res://.godot/imported/car_tire_0.png-11c8a5f86ab7c78b02673e0a7b007c06.s3tc.ctex"]
 
 [params]
 

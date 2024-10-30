@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dxdjj04nuiv6f"
-path="res://.godot/imported/car_tire.gltf-c96e456c00a3434883efb67bd86b8b93.scn"
+uid="uid://1kpirt3v7k8g"
+path="res://.godot/imported/car_mini.gltf-20263000ecd65edaa786cce207b15ece.scn"
 
 [deps]
 
-source_file="res://Assets/Car/car_tire.gltf"
-dest_files=["res://.godot/imported/car_tire.gltf-c96e456c00a3434883efb67bd86b8b93.scn"]
+source_file="res://Assets/Models/Car/car_mini.gltf"
+dest_files=["res://.godot/imported/car_mini.gltf-20263000ecd65edaa786cce207b15ece.scn"]
 
 [params]
 

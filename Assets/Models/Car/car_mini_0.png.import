@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tifuirilvo8c"
-path.s3tc="res://.godot/imported/car_mini_0.png-bbe3638e1f3a1058d113d52691dd1a34.s3tc.ctex"
+path.s3tc="res://.godot/imported/car_mini_0.png-fb29a0a7d14f74d405b0a806ca5c9307.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Car/car_mini_0.png"
-dest_files=["res://.godot/imported/car_mini_0.png-bbe3638e1f3a1058d113d52691dd1a34.s3tc.ctex"]
+source_file="res://Assets/Models/Car/car_mini_0.png"
+dest_files=["res://.godot/imported/car_mini_0.png-fb29a0a7d14f74d405b0a806ca5c9307.s3tc.ctex"]
 
 [params]
 
