@@ -14,6 +14,7 @@ offset_bottom = 40.0
 [node name="World" type="Node3D" parent="."]
 
 [node name="Car" parent="World" instance=ExtResource("2_f441o")]
+transform = Transform3D(0.957591, 0, 0.288129, 0, 1, 0, -0.288129, 0, 0.957591, -3.03017, -0.124573, -0.752187)
 speed = 30
 
 [node name="OmniLight3D" type="OmniLight3D" parent="World/Car"]
@@ -22,6 +23,9 @@ omni_range = 24.755
 
 [node name="Road" parent="World" instance=ExtResource("2_7cmc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30836, 1.55762, 1.43231)
 
 [node name="LevelCreator" type="Node3D" parent="."]
 

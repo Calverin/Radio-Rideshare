@@ -35,4 +35,4 @@ material_override = SubResource("StandardMaterial3D_h2kpx")
 mesh = SubResource("PrismMesh_y3lld")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21848, 0.127503, 0.215831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41075, 0.0430115, -1.15536)
