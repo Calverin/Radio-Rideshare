@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1klncb1e6jt8"]
 
-[ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
+[ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Models/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="2_igjln"]
 
