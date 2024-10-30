@@ -21,12 +21,6 @@ glow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a65qg")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="World" type="Node3D" parent="."]
 
 [node name="Car" parent="World" instance=ExtResource("2_f441o")]
@@ -34,8 +28,3 @@ speed = 30
 
 [node name="Road" parent="World" instance=ExtResource("2_7cmc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
-
-[node name="LevelCreator" type="Node3D" parent="."]
-
-[node name="PopupPanel" type="PopupPanel" parent="LevelCreator"]
-visible = true
