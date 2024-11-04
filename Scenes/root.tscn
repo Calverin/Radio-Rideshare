@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp3hb20j374vw"]
+[gd_scene load_steps=8 format=3 uid="uid://bp3hb20j374vw"]
 
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="1_hh7ij"]
 [ext_resource type="PackedScene" uid="uid://j3un3pk121r3" path="res://Scenes/road.tscn" id="2_7cmc6"]
 [ext_resource type="PackedScene" uid="uid://c1klncb1e6jt8" path="res://Scenes/car.tscn" id="2_f441o"]
+[ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="2_lb5jy"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ciel5"]
 panorama = ExtResource("1_hh7ij")
@@ -21,21 +22,23 @@ glow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a65qg")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="World" type="Node3D" parent="."]
-
-[node name="Car" parent="World" instance=ExtResource("2_f441o")]
-speed = 30
-
-[node name="Road" parent="World" instance=ExtResource("2_7cmc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
-
 [node name="LevelCreator" type="Node3D" parent="."]
 
 [node name="PopupPanel" type="PopupPanel" parent="LevelCreator"]
 visible = true
+
+[node name="Shader" type="ColorRect" parent="."]
+material = ExtResource("2_lb5jy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="World" type="Node3D" parent="Shader"]
+
+[node name="Car" parent="Shader/World" instance=ExtResource("2_f441o")]
+speed = 30
+
+[node name="Road" parent="Shader/World" instance=ExtResource("2_7cmc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
