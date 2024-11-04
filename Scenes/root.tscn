@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bp3hb20j374vw"]
 
-[ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/skybox.exr" id="1_hh7ij"]
+[ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="1_hh7ij"]
 [ext_resource type="PackedScene" uid="uid://j3un3pk121r3" path="res://Scenes/road.tscn" id="2_7cmc6"]
 [ext_resource type="PackedScene" uid="uid://c1klncb1e6jt8" path="res://Scenes/car.tscn" id="2_f441o"]
 
