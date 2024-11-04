@@ -34,8 +34,3 @@ speed = 30
 
 [node name="Road" parent="World" instance=ExtResource("2_7cmc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
-
-[node name="LevelCreator" type="Node3D" parent="."]
-
-[node name="PopupPanel" type="PopupPanel" parent="LevelCreator"]
-visible = true

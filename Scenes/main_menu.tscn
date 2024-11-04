@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dda7h8b46rvfn"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_clu2w"]
-[ext_resource type="FontFile" uid="uid://dx834clhxbmm5" path="res://Assets/Fonts/Starbirl.otf" id="2_8ddyg"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="2_8ddyg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vjd5v"]
 
