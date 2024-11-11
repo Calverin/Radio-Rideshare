@@ -16,6 +16,8 @@ func _ready():
 func _physics_process(delta: float):
 	## Drifting
 	if drifting:
+		if !$Drift.is_playing():
+			$Drift.play()
 		drift(delta)
 	else:
 		inputs()
@@ -56,6 +58,8 @@ func drift(delta: float):
 		switch_lane(drift_direction)
 
 func switch_lane(dir):
+	if $Drift.is_playing():
+		$Drift.stop()
 	drifting = false
 	drift_time = 0
 	drift_direction = 0
