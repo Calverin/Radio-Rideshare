@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvsfojo64e80s"
+path="res://.godot/imported/classicdrift.wav-69266fd2046e4bd418c8243bbbe2f6f0.sample"
+
+[deps]
+
+source_file="res://Assets/Audio Files/classicdrift.wav"
+dest_files=["res://.godot/imported/classicdrift.wav-69266fd2046e4bd418c8243bbbe2f6f0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

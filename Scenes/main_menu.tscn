@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dda7h8b46rvfn"]
+[gd_scene load_steps=10 format=3 uid="uid://dda7h8b46rvfn"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_clu2w"]
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="2_8ddyg"]
+[ext_resource type="AudioStream" uid="uid://dgvl0d065lkac" path="res://Assets/Audio Files/Mario Kart Stadium- By Panman14.mp3" id="3_57o8x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vjd5v"]
 
@@ -123,6 +124,11 @@ theme_override_fonts/font = ExtResource("2_8ddyg")
 theme_override_font_sizes/font_size = 75
 text = "Radio Rideshare"
 
+[node name="MainMenuSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_57o8x")
+volume_db = 12.0
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
