@@ -12,6 +12,7 @@ var turn_offset: float = 0
 func _ready():
 	current_lane = ceilf(lanes / 2.0)
 	position.x = current_lane * 10
+	
 
 func _physics_process(delta: float):
 	## Drifting
@@ -34,8 +35,9 @@ func _physics_process(delta: float):
 	var collision = move_and_collide(Vector3(0, 0, -speed * delta))
 	if collision:
 		# Temporary: go back to main menu
-		$Crash.play()
-		await get_tree().create_timer(1).timeout
+		if !$Crash.is_playing():
+			$Crash.play()
+		await get_tree().create_timer(.5).timeout
 		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 # -1 == left, 1 == right
 func drift(delta: float):
