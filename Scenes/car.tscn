@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1klncb1e6jt8"]
+[gd_scene load_steps=7 format=3 uid="uid://c1klncb1e6jt8"]
 
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="2_igjln"]
+[ext_resource type="AudioStream" uid="uid://bskk6kmdemh0p" path="res://Assets/Audio Files/crash.mp3" id="4_r0qd5"]
+[ext_resource type="AudioStream" uid="uid://bvsfojo64e80s" path="res://Assets/Audio Files/classicdrift.wav" id="5_rrrfm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wcon"]
 size = Vector3(2.4, 1.9, 4.5)
@@ -50,3 +52,11 @@ spot_range = 7.838
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1.25, -2.5)
 light_color = Color(1, 1, 0.443137, 1)
 spot_range = 7.838
+
+[node name="Crash" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_r0qd5")
+
+[node name="Drift" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
+stream = ExtResource("5_rrrfm")
+volume_db = 12.0
