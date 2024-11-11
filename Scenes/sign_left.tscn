@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dii4xne8rkkj3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08m0e"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+depth_draw_mode = 2
+albedo_color = Color(0.17798, 0.537731, 0.704356, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8jiyx"]
+size = Vector3(2, 1.5, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2kpx"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_y3lld"]
+size = Vector3(0.8, 1, 0.3)
+
+[node name="SignLeft" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.195108, 1.93863, 1.12301)
+
+[node name="Back" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40925, 0.746463, -1.59969)
+material_override = SubResource("StandardMaterial3D_08m0e")
+mesh = SubResource("BoxMesh_8jiyx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.05772, 0.802992, -1.59921)
+material_override = SubResource("StandardMaterial3D_h2kpx")
+mesh = SubResource("PrismMesh_y3lld")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.61972, 0.802992, -1.59921)
+material_override = SubResource("StandardMaterial3D_h2kpx")
+mesh = SubResource("PrismMesh_y3lld")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02172, 0.731272, -0.608325)

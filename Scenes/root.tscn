@@ -32,7 +32,7 @@ grow_vertical = 2
 
 [node name="World" type="Node3D" parent="Shader"]
 
-[node name="Car" parent="Shader/World" instance=ExtResource("2_f441o")]
+[node name="Car" parent="Shader/World" groups=["Player"] instance=ExtResource("2_f441o")]
 speed = 30
 
 [node name="Road" parent="Shader/World" instance=ExtResource("2_7cmc6")]
