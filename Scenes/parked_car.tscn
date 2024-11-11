@@ -1,23 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6albpaee00ao"]
+[gd_scene load_steps=4 format=3 uid="uid://c6albpaee00ao"]
 
-[ext_resource type="Script" path="res://Scripts/obstacle.gd" id="1_gtle8"]
-[ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="2_nojdn"]
+[ext_resource type="PackedScene" uid="uid://bimkyp4ajyirx" path="res://Assets/Car/car_mini_blue.gltf" id="3_ibnlw"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="3_q12ka"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eo8hr"]
-size = Vector3(2.27878, 2.03723, 2.84033)
+size = Vector3(2.5, 2.03723, 4.5)
 
-[node name="Parked Car" type="Area3D"]
-script = ExtResource("1_gtle8")
+[node name="Parked Car" type="StaticBody3D"]
+transform = Transform3D(-1.25, 0, -1.09278e-07, 0, 1.25, 0, 1.09278e-07, 0, -1.25, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00309944, 1.27269, 0.920166)
+[node name="Obstacle" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, -0.113709, 1.27269, 0.0402831)
 shape = SubResource("BoxShape3D_eo8hr")
 
 [node name="Body" type="Node3D" parent="."]
-
-[node name="Model" parent="Body" instance=ExtResource("2_nojdn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051, -1.00583e-07)
 
 [node name="Wheel" parent="Body" instance=ExtResource("3_q12ka")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.451, -1.375)
@@ -34,3 +30,6 @@ skeleton = NodePath("")
 [node name="Wheel4" parent="Body" instance=ExtResource("3_q12ka")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, 1.5)
 skeleton = NodePath("")
+
+[node name="Model" parent="Body" instance=ExtResource("3_ibnlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051, 0)

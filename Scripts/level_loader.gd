@@ -72,5 +72,5 @@ func load_from_file(path):
 
 func insert_obstacle(obstacle: PackedScene, z: int, lane: int):
 	var child: Node3D = obstacle.instantiate()
-	child.position = Vector3(lane * 10, 5, z * size)
+	child.position = Vector3(lane * 10, 3, z * size)
 	add_child(child)
