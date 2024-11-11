@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp3hb20j374vw"]
+[gd_scene load_steps=10 format=3 uid="uid://bp3hb20j374vw"]
 
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="1_hh7ij"]
 [ext_resource type="PackedScene" uid="uid://j3un3pk121r3" path="res://Scenes/road.tscn" id="2_7cmc6"]
 [ext_resource type="PackedScene" uid="uid://c1klncb1e6jt8" path="res://Scenes/car.tscn" id="2_f441o"]
 [ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="2_lb5jy"]
 [ext_resource type="AudioStream" uid="uid://bvsfojo64e80s" path="res://Assets/Audio Files/classicdrift.wav" id="3_ndua7"]
+[ext_resource type="AudioStream" uid="uid://bskk6kmdemh0p" path="res://Assets/Audio Files/crash.mp3" id="5_ophcu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ciel5"]
 panorama = ExtResource("1_hh7ij")
@@ -40,6 +41,11 @@ speed = 30
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
 stream = ExtResource("3_ndua7")
 volume_db = 12.0
+
+[node name="Crash" type="AudioStreamPlayer3D" parent="Shader/World/Car"]
+stream = ExtResource("5_ophcu")
+volume_db = 12.0
+max_distance = 2000.0
 
 [node name="Road" parent="Shader/World" instance=ExtResource("2_7cmc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
