@@ -29,7 +29,7 @@ offset_bottom = 40.0
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="Car" parent="World" instance=ExtResource("2_f441o")]
+[node name="Car" parent="World" groups=["Player"] instance=ExtResource("2_f441o")]
 speed = 30
 
 [node name="Road" parent="World" instance=ExtResource("2_7cmc6")]
