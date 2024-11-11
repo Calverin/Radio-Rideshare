@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6albpaee00ao"]
+[gd_scene load_steps=6 format=3 uid="uid://c6albpaee00ao"]
 
 [ext_resource type="Script" path="res://Scripts/obstacle.gd" id="1_gtle8"]
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="2_nojdn"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="3_q12ka"]
+[ext_resource type="AudioStream" uid="uid://bskk6kmdemh0p" path="res://Assets/Audio Files/crash.mp3" id="4_a8hcv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eo8hr"]
 size = Vector3(2.27878, 2.03723, 2.84033)
@@ -34,3 +35,6 @@ skeleton = NodePath("")
 [node name="Wheel4" parent="Body" instance=ExtResource("3_q12ka")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, 1.5)
 skeleton = NodePath("")
+
+[node name="Crash" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_a8hcv")
