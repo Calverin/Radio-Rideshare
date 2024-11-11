@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://db3nkcvsu28om"]
+[gd_scene load_steps=10 format=3 uid="uid://db3nkcvsu28om"]
 
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="1_5c5pu"]
+[ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="2_y4li5"]
 
 [sub_resource type="GDScript" id="GDScript_ycv7y"]
 script/source = "extends Control
@@ -23,14 +24,14 @@ func _on_back_button_pressed():
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ejccn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ye7y"]
-bg_color = Color(0.0367415, 0.416737, 0.416717, 1)
+bg_color = Color(0.862038, 0.304827, 0.837494, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng523"]
-bg_color = Color(0.0100733, 0.214333, 0.214316, 1)
+bg_color = Color(0.913725, 0.490196, 0.886275, 1)
 border_color = Color(0.8, 0.8, 0.8, 0)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -38,7 +39,7 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k4qx"]
-bg_color = Color(0.0666667, 0.6, 0.6, 1)
+bg_color = Color(0.913725, 0.831373, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -58,6 +59,7 @@ grow_vertical = 2
 script = SubResource("GDScript_ycv7y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+top_level = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -135,6 +137,7 @@ theme_override_font_sizes/font_size = 75
 text = "Settings"
 
 [node name="Back" type="Button" parent="."]
+top_level = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -158,5 +161,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ng523")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1k4qx")
 text = "Back
 "
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y4li5")
+expand_mode = 2
 
 [connection signal="pressed" from="Back" to="." method="_on_back_button_pressed"]
