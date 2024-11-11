@@ -55,6 +55,7 @@ spot_range = 7.838
 
 [node name="Crash" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_r0qd5")
+volume_db = 12.0
 
 [node name="Drift" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
