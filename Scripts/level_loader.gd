@@ -10,6 +10,10 @@ var data = []
 var headers = []
 var level_data = []
 
+## Obstacles
+var PARKED_CAR = preload("res://Scenes/parked_car.tscn")
+var LEFT_SIGN = preload("res://Scenes/sign_left.tscn")
+
 func _ready() -> void:
 	size = cell_scale
 	
@@ -49,8 +53,11 @@ func _ready() -> void:
 		var obstacles = level_data[i].split()
 		for o in range(lane_count):
 			if obstacles[o] == '1':
-				# Create something
-				pass
+				insert_obstacle(LEFT_SIGN, z, o)
+			if obstacles[o] == '2':
+				# Accounting for weird offset
+				insert_obstacle(PARKED_CAR, z, o + 1)
+				
 
 
 
@@ -62,3 +69,8 @@ func load_from_file(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
 	return content
+
+func insert_obstacle(obstacle: PackedScene, z: int, lane: int):
+	var child: Node3D = obstacle.instantiate()
+	child.position = Vector3(lane * 10, 5, z * size)
+	add_child(child)
