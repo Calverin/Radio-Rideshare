@@ -6,12 +6,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_eo8hr"]
 size = Vector3(2.5, 2.03723, 4.5)
 
-[node name="Parked Car" type="StaticBody3D"]
+[node name="Parked Car" type="Area3D" groups=["hard_obstacles"]]
 transform = Transform3D(-1.25, 0, -1.09278e-07, 0, 1.25, 0, 1.09278e-07, 0, -1.25, 0, 0, 0)
-
-[node name="Obstacle" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, -0.113709, 1.27269, 0.0402831)
-shape = SubResource("BoxShape3D_eo8hr")
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -33,3 +29,7 @@ skeleton = NodePath("")
 
 [node name="Model" parent="Body" instance=ExtResource("3_ibnlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051, 0)
+
+[node name="Obstacle" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, -0.113709, 1.27269, 0.0402831)
+shape = SubResource("BoxShape3D_eo8hr")

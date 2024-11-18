@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Area3D
 
 @export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
 @onready var lanes: int = $"../Road".lane_count
@@ -29,10 +29,8 @@ func _physics_process(delta: float):
 
 	## Movement
 	position.x = lerpf(position.x, current_lane * 10, delta * 16)
-	#position.z -= speed * delta
-	var collision = move_and_collide(Vector3(0, 0, -speed * delta))
-	if collision:
-		collision(collision)
+	position.z -= speed * delta
+
 # -1 == left, 1 == right
 func drift(delta: float):
 	## Params
@@ -88,6 +86,11 @@ func inputs():
 		turn_offset = -0.1
 		switch_lane(1)
 
-
-func collision(collision: KinematicCollision3D):
+func _on_area_entered(area):
+	print("collided")
+	
+	# running into an obstacle that ends the game
+	if (area.is_in_group("hard_obstacles")):
+		print("game over")
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 	pass

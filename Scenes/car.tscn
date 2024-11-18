@@ -7,7 +7,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wcon"]
 size = Vector3(2.4, 1.9, 4.5)
 
-[node name="Car" type="CharacterBody3D"]
+[node name="Car" type="Area3D" groups=["player_car"]]
 script = ExtResource("1_oamc2")
 speed = 60
 
@@ -37,10 +37,6 @@ skeleton = NodePath("../..")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, 1.5)
 skeleton = NodePath("../..")
 
-[node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
-shape = SubResource("BoxShape3D_0wcon")
-
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1.25, -2.5)
 light_color = Color(1, 1, 0.443137, 1)
@@ -50,3 +46,9 @@ spot_range = 7.838
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 1.25, -2.5)
 light_color = Color(1, 1, 0.443137, 1)
 spot_range = 7.838
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
+shape = SubResource("BoxShape3D_0wcon")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
