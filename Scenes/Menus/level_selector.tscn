@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://0jd4at430sgl"]
+
+[ext_resource type="Script" path="res://Scripts/level_selector.gd" id="1_f3cbc"]
+[ext_resource type="Script" path="res://Scripts/level_loader.gd" id="2_414t7"]
+
+[node name="Level Selector" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f3cbc")
+
+[node name="Levels" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="New Level" type="Button" parent="."]
+layout_mode = 0
+offset_right = 88.0
+offset_bottom = 31.0
+text = "New Level"
+
+[node name="Loader" type="Node" parent="."]
+script = ExtResource("2_414t7")

@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=3 uid="uid://dda7h8b46rvfn"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_bk668"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="2_0bc8r"]
+[ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_fqtet"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vjd5v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwugb"]
+bg_color = Color(0.913725, 0.490196, 0.886275, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw04e"]
+bg_color = Color(0.913725, 0.490196, 0.886275, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03lrb"]
+bg_color = Color(0.913725, 0.831373, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7xhif"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owt4w"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -414.0
+offset_top = -182.0
+offset_right = 412.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bk668")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -119.5
+offset_right = 159.5
+offset_bottom = 119.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vjd5v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xwugb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pw04e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_03lrb")
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7xhif")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xwugb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pw04e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_03lrb")
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owt4w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xwugb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pw04e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_03lrb")
+text = "Exit
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.0
+offset_top = -272.0
+offset_right = 391.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.552941, 0.733333, 0.898039, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 5
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("2_0bc8r")
+theme_override_font_sizes/font_size = 75
+text = "Radio Rideshare"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -138.0
+offset_right = 162.0
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_fqtet")
+expand_mode = 3
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
