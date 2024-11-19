@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqyxt4upm4lcx"]
+[gd_scene load_steps=9 format=3 uid="uid://dqyxt4upm4lcx"]
 
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="1_8khyd"]
 [ext_resource type="Texture2D" uid="uid://b7vnkqdfsydjy" path="res://Assets/icon.svg" id="2_ahxni"]
@@ -8,37 +8,91 @@ default_font = ExtResource("1_8khyd")
 default_font_size = 30
 
 [sub_resource type="SystemFont" id="SystemFont_6dwif"]
+font_names = PackedStringArray("Century Gothic")
 
 [sub_resource type="LabelSettings" id="LabelSettings_lymkw"]
 font = SubResource("SystemFont_6dwif")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_xo468"]
+font = SubResource("SystemFont_6dwif")
 font_size = 24
+font_color = Color(0.680321, 0.680321, 0.680321, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q5ib4"]
+font = SubResource("SystemFont_6dwif")
+font_size = 20
+font_color = Color(0.424984, 0.710562, 0.938283, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lsrk3"]
+font = SubResource("SystemFont_6dwif")
+font_size = 18
 
 [node name="Level Listing" type="ColorRect"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 128.0
+custom_minimum_size = Vector2(1000, 136)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -68.0
+offset_right = 500.0
+offset_bottom = 68.0
 grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource("Theme_oarp1")
 color = Color(0.38781, 0.45746, 0.793249, 1)
 
 [node name="Icon" type="TextureRect" parent="."]
 clip_contents = true
 layout_mode = 2
-offset_left = 9.0
-offset_right = 137.0
-offset_bottom = 128.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 132.0
+offset_bottom = 132.0
 texture = ExtResource("2_ahxni")
 expand_mode = 1
 
-[node name="Name" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
-offset_left = 145.0
-offset_top = 47.0
-offset_right = 877.0
-offset_bottom = 81.0
+offset_left = 136.0
+offset_top = 4.0
+offset_right = 836.0
+offset_bottom = 43.0
 text = "PLACEHOLDER"
 label_settings = SubResource("LabelSettings_lymkw")
+clip_text = true
+
+[node name="Artist" type="Label" parent="."]
+custom_minimum_size = Vector2(700, 0)
+offset_left = 136.0
+offset_top = 43.0
+offset_right = 836.0
+offset_bottom = 82.0
+text = "By: PLACEHOLDER"
+label_settings = SubResource("LabelSettings_xo468")
+clip_text = true
+
+[node name="Mapper" type="Label" parent="."]
+custom_minimum_size = Vector2(700, 0)
+offset_left = 135.0
+offset_top = 101.0
+offset_right = 835.0
+offset_bottom = 140.0
+text = "[PLACEHOLDER]"
+label_settings = SubResource("LabelSettings_q5ib4")
+clip_text = true
+
+[node name="NPS" type="Label" parent="."]
+custom_minimum_size = Vector2(700, 0)
+offset_left = 137.0
+offset_top = 83.0
+offset_right = 837.0
+offset_bottom = 108.0
+text = "NPS: X"
+label_settings = SubResource("LabelSettings_lsrk3")
 clip_text = true
 
 [node name="Play" type="Button" parent="."]
@@ -46,8 +100,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -131.0
-offset_bottom = 128.0
+offset_left = -135.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 132.0
 grow_horizontal = 0
 text = "Play"
 
@@ -57,7 +113,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -267.0
+offset_top = 4.0
 offset_right = -139.0
-offset_bottom = 128.0
+offset_bottom = 132.0
 grow_horizontal = 0
 text = "Edit"

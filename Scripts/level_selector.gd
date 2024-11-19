@@ -35,10 +35,14 @@ func refresh_level_list():
 		# Apply data
 		for child in listing.get_children():
 			if child is Label:
-				child.text = level.title
+				if child.name == "Title":
+					child.text = level.title
+				if child.name == "Artist":
+					child.text = "By: " + level.artist
+				if child.name == "Mapper":
+					child.text = "[" + level.mapper + "]"
+				if child.name == "NPS":
+					child.text = "NPS: " + str(level.nps)
 			if child is TextureRect and icon:
 				child.texture = icon
-				
-		if icon:
-			listing.get_child(0).texture = icon
 		
