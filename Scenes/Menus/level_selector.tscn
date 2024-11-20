@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_mqabr"]
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="4_qmppa"]
 
-[node name="Level Selector" type="Control"]
+[node name="LevelSelector" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +24,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="New Level" type="Button" parent="."]
+[node name="NewLevel" type="Button" parent="."]
 visible = false
 layout_mode = 1
 offset_right = 88.0
@@ -34,7 +34,7 @@ text = "New Level"
 [node name="Loader" type="Node" parent="."]
 script = ExtResource("2_414t7")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -49,7 +49,7 @@ grow_vertical = 2
 texture = ExtResource("3_mqabr")
 expand_mode = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

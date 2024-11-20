@@ -29,7 +29,7 @@ font_color = Color(0.424984, 0.710562, 0.938283, 1)
 font = SubResource("SystemFont_6dwif")
 font_size = 18
 
-[node name="Level Listing" type="ColorRect"]
+[node name="LevelListing" type="ColorRect"]
 custom_minimum_size = Vector2(1000, 136)
 anchors_preset = 8
 anchor_left = 0.5
