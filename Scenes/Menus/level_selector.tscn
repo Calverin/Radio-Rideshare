@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://0jd4at430sgl"]
+
+[ext_resource type="Script" path="res://Scripts/level_selector.gd" id="1_f3cbc"]
+[ext_resource type="Script" path="res://Scripts/level_loader.gd" id="2_414t7"]
+[ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_mqabr"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="4_qmppa"]
+
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f3cbc")
+
+[node name="Levels" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewLevel" type="Button" parent="."]
+visible = false
+layout_mode = 1
+offset_right = 88.0
+offset_bottom = 31.0
+text = "New Level"
+
+[node name="Loader" type="Node" parent="."]
+script = ExtResource("2_414t7")
+
+[node name="Background" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -138.0
+offset_right = 162.0
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mqabr")
+expand_mode = 3
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.0
+offset_top = -272.0
+offset_right = 391.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.552941, 0.733333, 0.898039, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 5
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("4_qmppa")
+theme_override_font_sizes/font_size = 75
+text = "Level Select"

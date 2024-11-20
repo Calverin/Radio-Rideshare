@@ -1,7 +1,7 @@
 extends Area3D
 
 @export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
-@onready var lanes: int = $"../Road".lane_count
+@onready var lanes: int = $"../Road".current_level.lanes
 var current_lane: int
 
 var drifting: bool = false
