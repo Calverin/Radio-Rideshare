@@ -9,6 +9,7 @@ default_font_size = 30
 
 [sub_resource type="SystemFont" id="SystemFont_6dwif"]
 font_names = PackedStringArray("Century Gothic")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_lymkw"]
 font = SubResource("SystemFont_6dwif")
@@ -67,6 +68,7 @@ clip_text = true
 
 [node name="Artist" type="Label" parent="."]
 custom_minimum_size = Vector2(700, 0)
+layout_mode = 0
 offset_left = 136.0
 offset_top = 43.0
 offset_right = 836.0
@@ -77,6 +79,7 @@ clip_text = true
 
 [node name="Mapper" type="Label" parent="."]
 custom_minimum_size = Vector2(700, 0)
+layout_mode = 0
 offset_left = 135.0
 offset_top = 101.0
 offset_right = 835.0
@@ -87,6 +90,7 @@ clip_text = true
 
 [node name="NPS" type="Label" parent="."]
 custom_minimum_size = Vector2(700, 0)
+layout_mode = 0
 offset_left = 137.0
 offset_top = 83.0
 offset_right = 837.0
