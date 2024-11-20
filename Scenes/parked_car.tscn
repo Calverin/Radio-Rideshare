@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_eo8hr"]
 size = Vector3(2.5, 2.03723, 4.5)
 
-[node name="Parked Car" type="Area3D" groups=["hard_obstacles"]]
+[node name="ParkedCar" type="Area3D" groups=["hard_obstacles"]]
 transform = Transform3D(-1.25, 0, -1.09278e-07, 0, 1.25, 0, 1.09278e-07, 0, -1.25, 0, 0, 0)
 
 [node name="Body" type="Node3D" parent="."]
