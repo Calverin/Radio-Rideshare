@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dda7h8b46rvfn"]
 
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_bk668"]
+[ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_bk668"]
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="2_0bc8r"]
 [ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_fqtet"]
 
@@ -131,6 +131,7 @@ offset_right = 162.0
 offset_bottom = 138.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_fqtet")
 expand_mode = 3
 

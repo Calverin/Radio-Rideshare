@@ -1,12 +1,13 @@
 extends Node
 
-var current_level: Level
+@export var current_level_name: String
+static var current_level: Level
 var size: int
 
 ## Obstacles
 #var PARKED_CAR = preload("res://Scenes/parked_car.tscn")
 #var LEFT_SIGN = preload("res://Scenes/sign_left.tscn")
-	
+
 class Level:
 	@export var title: String = ""
 	@export var artist: String = ""
@@ -14,14 +15,21 @@ class Level:
 	@export var nps: int = 1
 	@export var lanes: int = 3
 	@export var data = []
-	
-static func load_level(name: String) -> Level:
+
+func _ready():
+	var name = LevelLoader.current_level_name
+	if name:
+		print("Loading level: " + name)
+		load_level(name)
+
+static func load_level(level_name: String) -> Level:
 	var level = Level.new()
 	var data = []
 	var headers = []
 	
 	## Load level
-	var data_string = load_level_data(name)
+	var data_string = load_level_data(level_name)
+	print(data_string)
 	data = data_string.split("\n")
 	for s: String in data:
 		if s.begins_with("#"):
@@ -41,10 +49,12 @@ static func load_level(name: String) -> Level:
 			level.nps = int(h.split(":")[1])
 		if h.begins_with("LANES"):
 			level.lanes = int(h.split(":")[1])
+	
+	current_level = level
 	return level
 
 func generate_level(grid: GridMap, level: Level) -> void:
-	size = grid.cell_scale
+	size = int(grid.cell_scale)
 	var length = len(level.data)
 	## Generate level
 	for i in range(length):
@@ -65,14 +75,14 @@ func generate_level(grid: GridMap, level: Level) -> void:
 			if obstacles[o] == '1':
 				pass
 
-static func load_level_data(name) -> String:
-	var path = "user://Levels/" + name + "/" + name + ".rrl"
+static func load_level_data(file_name) -> String:
+	var path = "user://Levels/" + file_name + "/" + file_name + ".rrl"
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
 	return content
 	
-static func find_level_icon(name) -> Texture2D:
-	var path = "user://Levels/" + name + "/"
+static func find_level_icon(level_name) -> Texture2D:
+	var path = "user://Levels/" + level_name + "/"
 	var dir = DirAccess.open(path)
 	if dir:
 		dir.list_dir_begin()
@@ -82,8 +92,7 @@ static func find_level_icon(name) -> Texture2D:
 				var image = Image.new()
 				image.load(path + file_name)
 				if not image.is_empty():
-					var icon = ImageTexture.new()
-					return icon.create_from_image(image)
+					return ImageTexture.create_from_image(image)
 			file_name = dir.get_next()
 	return
 
