@@ -17,10 +17,10 @@ class Level:
 	@export var data = []
 
 func _ready():
-	var name = LevelLoader.current_level_name
-	if name:
-		print("Loading level: " + name)
-		load_level(name)
+	var level = LevelLoader.current_level_name
+	if level:
+		print("Loading level: " + level)
+		load_level(level)
 
 static func load_level(level_name: String) -> Level:
 	var level = Level.new()

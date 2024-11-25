@@ -55,5 +55,5 @@ func _on_play_level(level_name: String):
 	LevelLoader.current_level_name = level_name
 	get_tree().change_scene_to_file("res://Scenes/world.tscn")
 	
-func _on_edit_level(level_name: String):
+func _on_edit_level(_level_name: String):
 	print("Pretend you're in a level editor rn")
