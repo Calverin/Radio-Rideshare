@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="Radio-Rideshare"
-run/main_scene="res://Scenes/root.tscn"
+run/main_scene="res://Scenes/Menus/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Radio Rideshare"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+LevelLoader="*res://Scripts/Menus/level_loader.gd"
 
 [dotnet]
 

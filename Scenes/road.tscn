@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://j3un3pk121r3"]
 
 [ext_resource type="MeshLibrary" uid="uid://cye8w70qyxudp" path="res://Assets/Tiles/coloredtiles.tres" id="1_o0ymo"]
-[ext_resource type="Script" path="res://Scripts/road.gd" id="2_cknk7"]
+[ext_resource type="Script" path="res://Scripts/Menus/level_loader.gd" id="2_cknk7"]
 
 [node name="Road" type="GridMap"]
 mesh_library = ExtResource("1_o0ymo")

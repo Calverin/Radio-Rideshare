@@ -1,7 +1,7 @@
-extends CharacterBody3D
+extends Area3D
 
 @export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
-@onready var lanes: int = $"../Road".lane_count
+@onready var lanes: int = $"../Road".current_level.lanes
 var current_lane: int
 
 var drifting: bool = false
@@ -11,13 +11,8 @@ var turn_offset: float = 0
 var score: float = 0
 
 func _ready():
-	current_lane = ceilf(lanes / 2.0)
+	current_lane = int(ceilf(lanes / 2.0))
 	position.x = current_lane * 10
-	
-
-func _process(delta: float) -> void:
-	for object in get_tree().get_node_in_group("scorelements"):
-		score += object.get_score_inc()
 	
 
 func _physics_process(delta: float):
@@ -29,12 +24,14 @@ func _physics_process(delta: float):
 	if turn_offset != 0:
 		turn_offset = lerpf(turn_offset, 0, delta * 16)
 	
+	## Movement VFX
+	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
+	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) 
+		if abs(turn_offset) < 0.1 else 0.0) - drift_direction, delta * 8)
+
 	## Movement
 	position.x = lerpf(position.x, current_lane * 10, delta * 16)
 	position.z -= speed * delta
-	## Movement VFX
-	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
-	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) if abs(turn_offset) < 0.1 else 0) - drift_direction, delta * 8)
 
 # -1 == left, 1 == right
 func drift(delta: float):
@@ -90,3 +87,12 @@ func inputs():
 	elif Input.is_action_just_pressed("quick_right"):
 		turn_offset = -0.1
 		switch_lane(1)
+
+func _on_area_entered(area):
+	print("collided")
+	
+	# running into an obstacle that ends the game
+	if (area.is_in_group("hard_obstacles")):
+		print("game over")
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	pass
