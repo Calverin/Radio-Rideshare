@@ -19,7 +19,7 @@ config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-LevelLoader="*res://Scripts/Menus/level_loader.gd"
+LevelLoader="*res://Scripts/Util/level_loader.gd"
 
 [dotnet]
 

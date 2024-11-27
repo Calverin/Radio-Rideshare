@@ -8,14 +8,6 @@ var size: int
 #var PARKED_CAR = preload("res://Scenes/parked_car.tscn")
 #var LEFT_SIGN = preload("res://Scenes/sign_left.tscn")
 
-class Level:
-	@export var title: String = ""
-	@export var artist: String = ""
-	@export var mapper: String = ""
-	@export var nps: int = 1
-	@export var lanes: int = 3
-	@export var data = []
-
 func _ready():
 	var level = LevelLoader.current_level_name
 	if level:
@@ -93,6 +85,21 @@ static func find_level_icon(level_name) -> Texture2D:
 				image.load(path + file_name)
 				if not image.is_empty():
 					return ImageTexture.create_from_image(image)
+			file_name = dir.get_next()
+	return
+	
+static func find_level_song(level_name) -> AudioStreamMP3:
+	var path = "user://Levels/" + level_name + "/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and dir.get_current_dir().ends_with(".mp3"):
+				var file = FileAccess.open(path, FileAccess.READ)
+				var sound = AudioStreamMP3.new()
+				sound.data = file.get_buffer(file.get_length())
+				return sound
 			file_name = dir.get_next()
 	return
 

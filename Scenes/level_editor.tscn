@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://xcnagv6x7xhe"]
+
+[ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
+[ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
+[ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="3_g2rqs"]
+[ext_resource type="Script" path="res://Scripts/Util/level_loader.gd" id="4_qtmvx"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w8bpm"]
+panorama = ExtResource("3_g2rqs")
+
+[sub_resource type="Sky" id="Sky_3wipw"]
+sky_material = SubResource("PanoramaSkyMaterial_w8bpm")
+
+[sub_resource type="Environment" id="Environment_krcdb"]
+background_mode = 2
+sky = SubResource("Sky_3wipw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmmad"]
+albedo_texture = ExtResource("2_o1cen")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g2je8"]
+size = Vector2(40, 400)
+
+[node name="LevelEditor" type="Node"]
+script = ExtResource("1_yddgv")
+
+[node name="Skybox" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_krcdb")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150)
+material_override = SubResource("StandardMaterial3D_wmmad")
+mesh = SubResource("PlaneMesh_g2je8")
+
+[node name="Camera" type="Camera3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 40)
+current = true
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+
+[node name="Loader" type="Node" parent="."]
+script = ExtResource("4_qtmvx")
