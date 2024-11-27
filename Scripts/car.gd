@@ -8,10 +8,17 @@ var drifting: bool = false
 var drift_time: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
+var score: float = 0
 
 func _ready():
 	current_lane = ceilf(lanes / 2.0)
 	position.x = current_lane * 10
+	
+
+func _process(delta: float) -> void:
+	for object in get_tree().get_node_in_group("scorelements"):
+		score += object.get_score_inc()
+	
 
 func _physics_process(delta: float):
 	## Drifting
