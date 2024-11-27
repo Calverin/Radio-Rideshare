@@ -18,7 +18,7 @@ sky = SubResource("Sky_3wipw")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Root" type="Node"]
+[node name="World" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a65qg")
@@ -31,11 +31,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="World" type="Node3D" parent="Shader"]
+[node name="Level" type="Node3D" parent="Shader"]
 
-[node name="Car" parent="Shader/World" instance=ExtResource("2_f441o")]
+[node name="Car" parent="Shader/Level" instance=ExtResource("2_f441o")]
 speed = 30
 
-[node name="Road" parent="Shader/World" instance=ExtResource("2_7cmc6")]
+[node name="Road" parent="Shader/Level" instance=ExtResource("2_7cmc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
 mesh_library = ExtResource("5_jla2u")
