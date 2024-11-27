@@ -10,7 +10,7 @@ var drift_direction: float = 0
 var turn_offset: float = 0
 
 func _ready():
-	current_lane = ceilf(lanes / 2.0)
+	current_lane = int(ceilf(lanes / 2.0))
 	position.x = current_lane * 10
 	
 
@@ -25,7 +25,8 @@ func _physics_process(delta: float):
 	
 	## Movement VFX
 	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
-	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) if abs(turn_offset) < 0.1 else 0) - drift_direction, delta * 8)
+	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) 
+		if abs(turn_offset) < 0.1 else 0.0) - drift_direction, delta * 8)
 
 	## Movement
 	position.x = lerpf(position.x, current_lane * 10, delta * 16)

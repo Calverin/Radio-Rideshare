@@ -18,14 +18,14 @@ func refresh_level_list():
 				levels.append(file_name)
 			file_name = dir.get_next()
 
-	for name in levels:
+	for file_name in levels:
 		# Load level data
-		var level = $Loader.load_level(name)
+		var level = $Loader.load_level(file_name)
 		if level.title == "":
 			continue
 		
 		# Find icon
-		var icon = $Loader.find_level_icon(name)
+		var icon = $Loader.find_level_icon(file_name)
 		
 		# Create listing
 		var listing = LEVEL_LISTING.instantiate()
@@ -45,4 +45,15 @@ func refresh_level_list():
 					child.text = "NPS: " + str(level.nps)
 			if child is TextureRect and icon:
 				child.texture = icon
+			if child is Button:
+				if child.name == "PlayButton":
+					(child as Button).pressed.connect(_on_play_level.bind(level.title))
+				if child.name == "EditButton":
+					(child as Button).pressed.connect(_on_edit_level.bind(level.title))
 		
+func _on_play_level(level_name: String):
+	LevelLoader.current_level_name = level_name
+	get_tree().change_scene_to_file("res://Scenes/world.tscn")
+	
+func _on_edit_level(_level_name: String):
+	print("Pretend you're in a level editor rn")

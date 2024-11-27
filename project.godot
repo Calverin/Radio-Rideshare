@@ -17,10 +17,9 @@ config/custom_user_dir_name="Radio Rideshare"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
-[display]
+[autoload]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+LevelLoader="*res://Scripts/Menus/level_loader.gd"
 
 [dotnet]
 

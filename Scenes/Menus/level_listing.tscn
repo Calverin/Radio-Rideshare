@@ -99,7 +99,7 @@ text = "NPS: X"
 label_settings = SubResource("LabelSettings_lsrk3")
 clip_text = true
 
-[node name="Play" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -111,7 +111,7 @@ offset_bottom = 132.0
 grow_horizontal = 0
 text = "Play"
 
-[node name="Edit" type="Button" parent="."]
+[node name="EditButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
