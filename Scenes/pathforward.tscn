@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0hwyxf38a1th"]
+
+[sub_resource type="PointMesh" id="PointMesh_i2rm5"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_pq6sb"]
+mesh = SubResource("PointMesh_i2rm5")
+
+[sub_resource type="Curve3D" id="Curve3D_o0y0q"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, -4.92, 1.035, -3.23, 0.23, 0.899239, 1.78312, 0, 0, 0, 0, 0, 0, -0.377206, 0.556186, 0.697924),
+"tilts": PackedFloat32Array(0, -3.29)
+}
+point_count = 2
+
+[node name="Pathforward" type="Node3D"]
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_pq6sb")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_o0y0q")
