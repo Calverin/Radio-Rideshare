@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=4 uid="uid://bp3hb20j374vw"]
+[gd_scene load_steps=35 format=4 uid="uid://bp3hb20j374vw"]
 
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="1_q8wfu"]
 [ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="2_623nx"]
 [ext_resource type="PackedScene" uid="uid://c1klncb1e6jt8" path="res://Scenes/car.tscn" id="3_364ao"]
 [ext_resource type="PackedScene" uid="uid://j3un3pk121r3" path="res://Scenes/road.tscn" id="4_b20rt"]
+[ext_resource type="Script" path="res://Scripts/song.gd" id="5_h23w4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ciel5"]
 panorama = ExtResource("1_q8wfu")
@@ -609,3 +610,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1, 0)
 mesh_library = SubResource("MeshLibrary_iwnud")
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
+script = ExtResource("5_h23w4")

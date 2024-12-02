@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://xcnagv6x7xhe"]
+[gd_scene load_steps=11 format=3 uid="uid://xcnagv6x7xhe"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="3_g2rqs"]
+[ext_resource type="Script" path="res://Scripts/song.gd" id="4_flycw"]
 [ext_resource type="Script" path="res://Scripts/Util/level_loader.gd" id="4_qtmvx"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w8bpm"]
@@ -51,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 40)
 current = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
+script = ExtResource("4_flycw")
 
 [node name="Loader" type="Node" parent="."]
 script = ExtResource("4_qtmvx")

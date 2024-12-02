@@ -13,6 +13,7 @@ func _ready():
 	if level:
 		print("Loading level: " + level)
 		var level_obj = load_level(level)
+		
 		# Generate the level if this is called on a GridMap
 		if name == "Road":
 			generate_level($"." as GridMap, level_obj)
@@ -49,11 +50,6 @@ static func load_level(level_name: String) -> Level:
 	return level
 
 func generate_level(grid: GridMap, level: Level) -> void:
-	# Load song
-	var song: AudioStreamMP3 = find_level_song(level.title)
-	$"../../../Song".stream = song
-	$"../../../Song".play()
-	
 	size = int(grid.cell_scale)
 	var length = len(level.data)
 	## Generate level
