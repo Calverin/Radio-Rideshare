@@ -12,7 +12,10 @@ func _ready():
 	var level = LevelLoader.current_level_name
 	if level:
 		print("Loading level: " + level)
-		load_level(level)
+		var level_obj = load_level(level)
+		# Generate the level if this is called on a GridMap
+		if name == "Road":
+			generate_level($"." as GridMap, level_obj)
 
 static func load_level(level_name: String) -> Level:
 	var level = Level.new()
@@ -46,6 +49,11 @@ static func load_level(level_name: String) -> Level:
 	return level
 
 func generate_level(grid: GridMap, level: Level) -> void:
+	# Load song
+	var song: AudioStreamMP3 = find_level_song(level.title)
+	$"../../../Song".stream = song
+	$"../../../Song".play()
+	
 	size = int(grid.cell_scale)
 	var length = len(level.data)
 	## Generate level
@@ -89,14 +97,16 @@ static func find_level_icon(level_name) -> Texture2D:
 	return
 	
 static func find_level_song(level_name) -> AudioStreamMP3:
+	print("Searching for song for " + level_name)
 	var path = "user://Levels/" + level_name + "/"
 	var dir = DirAccess.open(path)
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir() and dir.get_current_dir().ends_with(".mp3"):
-				var file = FileAccess.open(path, FileAccess.READ)
+			if not dir.current_is_dir() and file_name.ends_with(".mp3"):
+				print("Song found at " + path + file_name)
+				var file = FileAccess.open(path + file_name, FileAccess.READ)
 				var sound = AudioStreamMP3.new()
 				sound.data = file.get_buffer(file.get_length())
 				return sound
