@@ -8,8 +8,3 @@ func _ready() -> void:
 	stream = song
 	if get_parent().name == "World":
 		play()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
