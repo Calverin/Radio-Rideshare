@@ -67,6 +67,8 @@ mesh = SubResource("BoxMesh_iie70")
 transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 0, 25, 0)
 current = true
 
+[node name="Notes" type="Node3D" parent="Level"]
+
 [node name="Song" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4_flycw")
 

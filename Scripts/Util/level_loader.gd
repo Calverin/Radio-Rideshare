@@ -4,9 +4,9 @@ extends Node
 static var current_level: Level
 var size: int
 
-## Obstacles
-#var PARKED_CAR = preload("res://Scenes/parked_car.tscn")
-#var LEFT_SIGN = preload("res://Scenes/sign_left.tscn")
+## Objects
+var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
+var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
 
 func _ready():
 	var level = LevelLoader.current_level_name
@@ -69,13 +69,29 @@ func generate_level(grid: GridMap, level: Level) -> void:
 		var obstacles = level.data[i].split()
 		for o in range(level.lanes):
 			if obstacles[o] == '1':
-				pass
+				insert_obstacle(TAP_NOTE, z, o)
+			if obstacles[o] == '2':
+				insert_obstacle(PARKED_CAR, z, o)
 
-static func load_level_data(file_name) -> String:
+static func load_level_data(file_name: String) -> String:
 	var path = "user://Levels/" + file_name + "/" + file_name + ".rrl"
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
 	return content
+	
+static func save_level_data(level: Level):
+	var path = "user://Levels/" + LevelLoader.current_level_name + "/" + LevelLoader.current_level_name + ".rrl"
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	var content = ""
+	content += "#TITLE:" + level.title + "\n"
+	content += "#ARTIST:" + level.artist + "\n"
+	content += "#MAPPER:" + level.mapper + "\n"
+	content += "#NPS:" + str(level.nps) + "\n"
+	content += "#LANES:" + str(level.lanes) + "\n\n\n"
+	for s in level.data:
+		content += s + "\n"
+	file.store_string(content)
+	file.close()
 	
 static func find_level_icon(level_name) -> Texture2D:
 	var path = "user://Levels/" + level_name + "/"
