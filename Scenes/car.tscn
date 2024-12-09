@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1klncb1e6jt8"]
+[gd_scene load_steps=6 format=3 uid="uid://c1klncb1e6jt8"]
 
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="2_igjln"]
+[ext_resource type="Script" path="res://Scenes/score.gd" id="4_lcxul"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wcon"]
 size = Vector3(2.4, 1.9, 4.5)
@@ -50,5 +51,19 @@ spot_range = 7.838
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
 shape = SubResource("BoxShape3D_0wcon")
+
+[node name="ScoreBox" type="StaticBody2D" parent="."]
+position = Vector2(1152, 0)
+scale = Vector2(3, 3)
+
+[node name="Score" type="RichTextLabel" parent="ScoreBox"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "SCORE: 99999999"
+script = ExtResource("4_lcxul")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
