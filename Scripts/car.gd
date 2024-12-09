@@ -12,10 +12,10 @@ var score: float = 0
 
 func _ready():
 	lanes = LevelLoader.current_level.lanes
-	current_lane = lanes / 2
+	current_lane = ceil(float(lanes) / 2)
 	position.x = current_lane * 10
 
-func _process(delta: float):
+func _process(_delta: float):
 	if (Input.is_action_pressed("honk")):
 		for object in get_tree().get_nodes_in_group("taps"):
 			if(object.isactive()):

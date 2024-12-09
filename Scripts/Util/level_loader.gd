@@ -5,6 +5,8 @@ static var current_level: Level
 var size: int
 
 ## Objects
+var CAR = preload("res://Scenes/car.tscn")
+
 var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
 var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
 
@@ -50,6 +52,9 @@ static func load_level(level_name: String) -> Level:
 	return level
 
 func generate_level(grid: GridMap, level: Level) -> void:
+	# Insert car
+	add_sibling.call_deferred(CAR.instantiate())
+	
 	size = int(grid.cell_scale)
 	var length = len(level.data)
 	## Generate level
