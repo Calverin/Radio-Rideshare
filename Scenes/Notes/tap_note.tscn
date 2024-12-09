@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://chx1313q7vkys"]
 
-[ext_resource type="Script" path="res://Scripts/tapnote.gd" id="1_gcykg"]
+[ext_resource type="Script" path="res://Scripts/tap_note.gd" id="1_gcykg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d4bs"]
 size = Vector3(1, 1, 2.05664)
@@ -18,7 +18,7 @@ material = SubResource("StandardMaterial3D_ltmdm")
 size = Vector3(0.7, 0.05, 0.46)
 
 [node name="TapNote" type="Node3D" groups=["tap_notes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00850201)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 script = ExtResource("1_gcykg")
 
 [node name="Good" type="Area3D" parent="."]

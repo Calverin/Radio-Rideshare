@@ -17,9 +17,8 @@ func _ready():
 
 func _process(_delta: float):
 	if(Input.is_action_pressed("honk")):
-		for object in get_tree().get_nodes_in_group("taps"):
-			if(object.isactive()):
-				score += object.score(self)
+		for object in get_tree().get_nodes_in_group("tap_notes"):
+			score += object.score(self)
 	if(Input.is_action_pressed("drift_left")):
 		for object in get_tree().get_nodes_in_group("left_drifts"):
 			if(object.isactive()):
