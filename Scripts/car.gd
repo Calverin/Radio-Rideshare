@@ -8,7 +8,7 @@ var drifting: bool = false
 var drift_time: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
-var score: float = 0
+var score: int = 0
 
 func _ready():
 	lanes = LevelLoader.current_level.lanes
