@@ -70,13 +70,13 @@ func generate_level(grid: GridMap, level: Level) -> void:
 			x += size
 		# Right side (10 is a flipped rotation on the y axis, don't ask y...)
 		grid.set_cell_item(Vector3i(x + size, 0, z - size), 0, 10)
-		## Obstacles
-		var obstacles = level.data[i].split()
+		## Objects
+		var objects = level.data[i].split()
 		for o in range(level.lanes):
-			if obstacles[o] == '1':
-				insert_obstacle(TAP_NOTE, z, o)
-			if obstacles[o] == '2':
-				insert_obstacle(PARKED_CAR, z, o)
+			if objects[o] == '1':
+				insert_object(TAP_NOTE, z, o)
+			if objects[o] == '2':
+				insert_object(PARKED_CAR, z, o)
 
 static func load_level_data(file_name: String) -> String:
 	var path = "user://Levels/" + file_name + "/" + file_name + ".rrl"
@@ -130,7 +130,7 @@ static func find_level_song(level_name) -> AudioStreamMP3:
 			file_name = dir.get_next()
 	return
 
-func insert_obstacle(obstacle: PackedScene, z: int, lane: int) -> void:
-	var child: Node3D = obstacle.instantiate()
-	child.position = Vector3(lane * 10, 3, z * size)
-	add_child(child)
+func insert_object(obj: PackedScene, z: int, lane: int) -> void:
+	var child: Node3D = obj.instantiate()
+	child.position = Vector3(lane * 10, 0, z * (size - 1))
+	$"../Objects".add_child(child)
