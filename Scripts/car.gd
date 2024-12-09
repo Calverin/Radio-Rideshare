@@ -16,8 +16,16 @@ func _ready():
 	position.x = current_lane * 10
 
 func _process(delta: float):
-	if (Input.is_action_pressed("honk")):
-		for object in get_tree().get_nodes_in_group("tap_notes"):
+	if(Input.is_action_pressed("honk")):
+		for object in get_tree().get_nodes_in_group("taps"):
+			if(object.isactive()):
+				score += object.score(self)
+	if(Input.is_action_pressed("drift_left")):
+		for object in get_tree().get_nodes_in_group("left_drifts"):
+			if(object.isactive()):
+				score += object.score(self)
+	if(Input.is_action_pressed("drift_right")):
+		for object in get_tree().get_nodes_in_group("right_drifts"):
 			if(object.isactive()):
 				score += object.score(self)
 
