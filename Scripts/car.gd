@@ -8,7 +8,7 @@ var drifting: bool = false
 var drift_time: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
-var score: float = 0
+var score: int = 0
 
 func _ready():
 	lanes = LevelLoader.current_level.lanes
@@ -17,9 +17,9 @@ func _ready():
 
 func _process(delta: float):
 	if (Input.is_action_pressed("honk")):
-		for object in get_tree().get_nodes_in_group("taps"):
+		for object in get_tree().get_nodes_in_group("tap_notes"):
 			if(object.isactive()):
-				score += object.score()
+				score += object.score(self)
 
 func _physics_process(delta: float):
 	## Drifting
