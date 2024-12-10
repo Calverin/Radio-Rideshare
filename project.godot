@@ -25,6 +25,10 @@ LevelLoader="*res://Scripts/Util/level_loader.gd"
 
 project/assembly_name="Radio-Rideshare"
 
+[global_group]
+
+inside_notes="Notes you're currently inside of"
+
 [input]
 
 steer_right={

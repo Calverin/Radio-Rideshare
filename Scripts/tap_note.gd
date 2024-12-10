@@ -1,10 +1,10 @@
 extends Node3D
 
 func score(playerbox: Area3D) -> int:
-	print("Scoring!")
-	if ($Good.overlaps_area(playerbox)):
-		if ($Great.overlaps_area(playerbox)):
-			if ($Perfect.overlaps_area(playerbox)):
+	if ($Good.overlaps_body(playerbox)):
+		print("wahoo!")
+		if ($Great.overlaps_body(playerbox)):
+			if ($Perfect.overlaps_body(playerbox)):
 				queue_free()
 				return 300
 			queue_free()

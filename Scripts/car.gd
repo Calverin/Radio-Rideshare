@@ -17,8 +17,10 @@ func _ready():
 
 func _process(_delta: float):
 	if(Input.is_action_pressed("honk")):
-		for object in get_tree().get_nodes_in_group("tap_notes"):
+		for object: Node3D in get_tree().get_nodes_in_group("inside_notes"):
+			print("notesssnotesss")
 			score += object.score(self)
+			break
 	if(Input.is_action_pressed("drift_left")):
 		for object in get_tree().get_nodes_in_group("left_drifts"):
 			if(object.isactive()):
@@ -101,11 +103,20 @@ func inputs():
 		turn_offset = -0.1
 		switch_lane(1)
 
-func _on_area_entered(area):
-	print("collided")
-	
+func _on_area_entered(area: Area3D):
+	# entering the body of a tapnote
+	if (area.is_in_group("tap_notes")):
+		print("added to group")
+		area.add_to_group("inside_notes")
+		pass
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
 		print("game over")
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
+	pass
+
+func _on_area_exited(area: Area3D):
+	if (area.is_in_group("inside_notes")):
+		print("removing from group")
+		area.remove_from_group("inside_notes")
 	pass
