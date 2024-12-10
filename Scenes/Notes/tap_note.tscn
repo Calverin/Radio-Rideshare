@@ -18,7 +18,6 @@ material = SubResource("StandardMaterial3D_ltmdm")
 size = Vector3(0.7, 0.05, 0.46)
 
 [node name="TapNote" type="Node3D" groups=["tap_notes"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 script = ExtResource("1_gcykg")
 
 [node name="Good" type="Area3D" parent="."]

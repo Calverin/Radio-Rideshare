@@ -1,6 +1,6 @@
 extends Area3D
 
-@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
+var speed: int
 var lanes: int
 var current_lane: int
 
@@ -11,6 +11,7 @@ var turn_offset: float = 0
 var score: int = 0
 
 func _ready():
+	speed = 50
 	lanes = LevelLoader.current_level.lanes
 	current_lane = ceil(float(lanes) / 2)
 	position.x = current_lane * 10
@@ -23,11 +24,11 @@ func _process(_delta: float):
 			break
 	if(Input.is_action_pressed("drift_left")):
 		for object in get_tree().get_nodes_in_group("left_drifts"):
-			if(object.isactive()):
+			if (object.isactive()):
 				score += object.score(self)
-	if(Input.is_action_pressed("drift_right")):
+	if (Input.is_action_pressed("drift_right")):
 		for object in get_tree().get_nodes_in_group("right_drifts"):
-			if(object.isactive()):
+			if (object.isactive()):
 				score += object.score(self)
 
 func _physics_process(delta: float):
