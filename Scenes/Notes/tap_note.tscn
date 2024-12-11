@@ -2,22 +2,22 @@
 
 [ext_resource type="Script" path="res://Scripts/tap_note.gd" id="1_gcykg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8d4bs"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vblne"]
 size = Vector3(1, 1, 2.05664)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nnpye"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ypvs"]
 size = Vector3(1, 1, 3.10925)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yanm2"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0t7h1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltmdm"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_1uneg"]
+[sub_resource type="BoxMesh" id="BoxMesh_socjg"]
 material = SubResource("StandardMaterial3D_ltmdm")
 size = Vector3(0.7, 0.05, 0.46)
 
-[node name="TapNote" type="Node3D" groups=["tap_notes"]]
+[node name="TapNote" type="Area3D" groups=["tap_notes"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_gcykg")
 
@@ -25,19 +25,19 @@ script = ExtResource("1_gcykg")
 
 [node name="GoodShape" type="CollisionShape3D" parent="Good"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.52832)
-shape = SubResource("BoxShape3D_8d4bs")
+shape = SubResource("BoxShape3D_vblne")
 
 [node name="Great" type="Area3D" parent="."]
 
 [node name="GreatShape" type="CollisionShape3D" parent="Great"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.05463)
-shape = SubResource("BoxShape3D_nnpye")
+shape = SubResource("BoxShape3D_0ypvs")
 
 [node name="Perfect" type="Area3D" parent="."]
 
 [node name="PerfectShape" type="CollisionShape3D" parent="Perfect"]
-shape = SubResource("BoxShape3D_yanm2")
+shape = SubResource("BoxShape3D_0t7h1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -0.446971, 0)
-mesh = SubResource("BoxMesh_1uneg")
+mesh = SubResource("BoxMesh_socjg")
