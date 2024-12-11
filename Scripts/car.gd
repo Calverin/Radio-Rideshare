@@ -8,7 +8,9 @@ var drifting: bool = false
 var drift_time: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
+
 var score: int = 0
+var recent_hit: String = ""
 
 func _ready():
 	speed = 50
@@ -18,9 +20,11 @@ func _ready():
 
 func _process(_delta: float):
 	if (Input.is_action_pressed("honk")):
-		for object: Area3D in get_tree().get_nodes_in_group("tap_notes"):
-			if overlaps_area(object):
-				score += object.score(self)
+		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
+			var hit: Array = object.score(self)
+			score += hit[0]
+			recent_hit = hit[1]
+			object.remove_from_group("inside_notes")
 			break
 	if (Input.is_action_pressed("drift_left")):
 		for object in get_tree().get_nodes_in_group("left_drifts"):
@@ -104,9 +108,9 @@ func inputs():
 		turn_offset = -0.1
 		switch_lane(1)
 
-func _on_area_entered(area):
+func _on_area_entered(area: Area3D):
 	if (area.is_in_group("tap_notes")):
-		print("wahoo")
+		area.add_to_group("inside_notes")
 		return
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
