@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://chx1313q7vkys"]
+[gd_scene load_steps=8 format=3 uid="uid://chx1313q7vkys"]
 
 [ext_resource type="Script" path="res://Scripts/tap_note.gd" id="1_gcykg"]
 
@@ -16,6 +16,9 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_socjg"]
 material = SubResource("StandardMaterial3D_ltmdm")
 size = Vector3(0.7, 0.05, 0.46)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_esdwf"]
+size = Vector3(7, 0.75, 4.605)
 
 [node name="TapNote" type="Area3D" groups=["tap_notes"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -41,3 +44,7 @@ shape = SubResource("BoxShape3D_0t7h1")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -0.446971, 0)
 mesh = SubResource("BoxMesh_socjg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.319695, -0.0045166)
+shape = SubResource("BoxShape3D_esdwf")

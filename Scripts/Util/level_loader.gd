@@ -133,4 +133,5 @@ static func find_level_song(level_name) -> AudioStreamMP3:
 func insert_object(obj: PackedScene, z: int, lane: int) -> void:
 	var child: Node3D = obj.instantiate()
 	child.position = Vector3(lane * 10 + 10, child.position.y, z * (size - 1))
+	child.name += " (" + str(lane) + "," + str(z) + ")"
 	$"../Objects".add_child(child)

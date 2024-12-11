@@ -17,11 +17,12 @@ func _ready():
 	position.x = current_lane * 10
 
 func _process(_delta: float):
-	if(Input.is_action_pressed("honk")):
-		for object: Node3D in get_tree().get_nodes_in_group("tap_notes"):
-			score += object.score(self)
+	if (Input.is_action_pressed("honk")):
+		for object: Area3D in get_tree().get_nodes_in_group("tap_notes"):
+			if overlaps_area(object):
+				score += object.score(self)
 			break
-	if(Input.is_action_pressed("drift_left")):
+	if (Input.is_action_pressed("drift_left")):
 		for object in get_tree().get_nodes_in_group("left_drifts"):
 			if (object.isactive()):
 				score += object.score(self)
