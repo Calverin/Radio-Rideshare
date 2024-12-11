@@ -1,4 +1,4 @@
-extends Node3D
+extends Area3D
 
 func score(playerbox: Area3D) -> int:
 	if ($Good.overlaps_body(playerbox)):
@@ -11,5 +11,4 @@ func score(playerbox: Area3D) -> int:
 			return 200
 		queue_free()
 		return 100
-	queue_free()
 	return 0
