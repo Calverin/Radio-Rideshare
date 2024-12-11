@@ -109,15 +109,13 @@ func _on_area_entered(area: Area3D):
 	if (area.is_in_group("tap_notes")):
 		print("added to group")
 		area.add_to_group("inside_notes")
-		pass
+		return
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
 		print("game over")
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
-	pass
 
 func _on_area_exited(area: Area3D):
 	if (area.is_in_group("inside_notes")):
 		print("removing from group")
 		area.remove_from_group("inside_notes")
-	pass

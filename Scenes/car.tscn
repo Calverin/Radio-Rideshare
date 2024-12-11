@@ -52,10 +52,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
 shape = SubResource("BoxShape3D_0wcon")
 
 [node name="ScoreBox" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(1152, 0)
 scale = Vector2(3, 3)
 
 [node name="Score" type="RichTextLabel" parent="ScoreBox"]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
