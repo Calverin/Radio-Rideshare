@@ -9,9 +9,6 @@ var drift_time: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
 
-var score: int = 0
-var recent_hit: String = ""
-
 func _ready():
 	speed = 50
 	lanes = LevelLoader.current_level.lanes
@@ -22,18 +19,18 @@ func _process(_delta: float):
 	if (Input.is_action_pressed("honk")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
 			var hit: Array = object.score(self)
-			score += hit[0]
-			recent_hit = hit[1]
+			UI.score += hit[0]
+			UI.recent_hit = hit[1]
 			object.remove_from_group("inside_notes")
 			break
 	if (Input.is_action_pressed("drift_left")):
 		for object in get_tree().get_nodes_in_group("left_drifts"):
 			if (object.isactive()):
-				score += object.score(self)
+				UI.score += object.score(self)
 	if (Input.is_action_pressed("drift_right")):
 		for object in get_tree().get_nodes_in_group("right_drifts"):
 			if (object.isactive()):
-				score += object.score(self)
+				UI.score += object.score(self)
 
 func _physics_process(delta: float):
 	## Drifting

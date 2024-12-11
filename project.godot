@@ -20,6 +20,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 LevelLoader="*res://Scripts/Util/level_loader.gd"
+UI="*res://Scripts/Menus/ui.gd"
 
 [dotnet]
 

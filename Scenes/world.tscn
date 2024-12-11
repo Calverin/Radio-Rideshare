@@ -1,8 +1,10 @@
-[gd_scene load_steps=34 format=4 uid="uid://bp3hb20j374vw"]
+[gd_scene load_steps=36 format=4 uid="uid://bp3hb20j374vw"]
 
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="1_q8wfu"]
 [ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="2_623nx"]
 [ext_resource type="PackedScene" uid="uid://j3un3pk121r3" path="res://Scenes/road.tscn" id="4_b20rt"]
+[ext_resource type="Script" path="res://Scripts/Menus/ui.gd" id="4_k6i16"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="4_rdao5"]
 [ext_resource type="Script" path="res://Scripts/song.gd" id="5_h23w4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ciel5"]
@@ -598,6 +600,48 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UI" type="Control" parent="Shader"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_k6i16")
+
+[node name="Score" type="RichTextLabel" parent="Shader/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.5
+offset_top = 40.0
+offset_right = 168.5
+offset_bottom = 93.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_rdao5")
+theme_override_font_sizes/normal_font_size = 50
+text = "SCORE: 0
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="NoteHit" type="RichTextLabel" parent="Shader/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_top = 125.0
+offset_right = 38.0
+offset_bottom = 148.0
+grow_horizontal = 2
+text = "LAST_NOTE"
+fit_content = true
+scroll_active = false
 
 [node name="Level" type="Node3D" parent="Shader"]
 
