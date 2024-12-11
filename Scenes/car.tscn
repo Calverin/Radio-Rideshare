@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1klncb1e6jt8"]
+[gd_scene load_steps=7 format=3 uid="uid://c1klncb1e6jt8"]
 
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="2_igjln"]
+[ext_resource type="Script" path="res://Scripts/Menus/score.gd" id="4_lcxul"]
+[ext_resource type="Script" path="res://Scripts/Menus/note_hit.gd" id="5_bhujm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wcon"]
 size = Vector3(2.4, 1.9, 4.5)
 
 [node name="Car" type="Area3D" groups=["player_car"]]
 script = ExtResource("1_oamc2")
-speed = 60
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 6.70486, 5.96559)
@@ -51,4 +52,39 @@ spot_range = 7.838
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
 shape = SubResource("BoxShape3D_0wcon")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1152, 0)
+scale = Vector2(3, 3)
+
+[node name="Score" type="RichTextLabel" parent="StaticBody2D"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "SCORE: "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_lcxul")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(576, 100)
+scale = Vector2(2, 2)
+
+[node name="NoteHit" type="RichTextLabel" parent="StaticBody2D2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.5
+offset_right = 48.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "LAST_NOTE"
+fit_content = true
+scroll_active = false
+script = ExtResource("5_bhujm")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -4,23 +4,21 @@ extends Node
 static var current_level: Level
 var size: int
 
-## Obstacles
-#var PARKED_CAR = preload("res://Scenes/parked_car.tscn")
-#var LEFT_SIGN = preload("res://Scenes/sign_left.tscn")
+## Objects
+var CAR = preload("res://Scenes/car.tscn")
 
-class Level:
-	@export var title: String = ""
-	@export var artist: String = ""
-	@export var mapper: String = ""
-	@export var nps: int = 1
-	@export var lanes: int = 3
-	@export var data = []
+var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
+var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
 
 func _ready():
 	var level = LevelLoader.current_level_name
 	if level:
 		print("Loading level: " + level)
-		load_level(level)
+		var level_obj = load_level(level)
+		
+		# Generate the level if this is called on a GridMap
+		if name == "Road":
+			generate_level($"." as GridMap, level_obj)
 
 static func load_level(level_name: String) -> Level:
 	var level = Level.new()
@@ -54,6 +52,9 @@ static func load_level(level_name: String) -> Level:
 	return level
 
 func generate_level(grid: GridMap, level: Level) -> void:
+	# Insert car
+	add_sibling.call_deferred(CAR.instantiate())
+	
 	size = int(grid.cell_scale)
 	var length = len(level.data)
 	## Generate level
@@ -69,17 +70,33 @@ func generate_level(grid: GridMap, level: Level) -> void:
 			x += size
 		# Right side (10 is a flipped rotation on the y axis, don't ask y...)
 		grid.set_cell_item(Vector3i(x + size, 0, z - size), 0, 10)
-		## Obstacles
-		var obstacles = level.data[i].split()
+		## Objects
+		var objects = level.data[i].split()
 		for o in range(level.lanes):
-			if obstacles[o] == '1':
-				pass
+			if objects[o] == '1':
+				insert_object(TAP_NOTE, z, o)
+			if objects[o] == '2':
+				insert_object(PARKED_CAR, z, o)
 
-static func load_level_data(file_name) -> String:
+static func load_level_data(file_name: String) -> String:
 	var path = "user://Levels/" + file_name + "/" + file_name + ".rrl"
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
 	return content
+	
+static func save_level_data(level: Level):
+	var path = "user://Levels/" + LevelLoader.current_level_name + "/" + LevelLoader.current_level_name + ".rrl"
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	var content = ""
+	content += "#TITLE:" + level.title + "\n"
+	content += "#ARTIST:" + level.artist + "\n"
+	content += "#MAPPER:" + level.mapper + "\n"
+	content += "#NPS:" + str(level.nps) + "\n"
+	content += "#LANES:" + str(level.lanes) + "\n\n\n"
+	for s in level.data:
+		content += s + "\n"
+	file.store_string(content)
+	file.close()
 	
 static func find_level_icon(level_name) -> Texture2D:
 	var path = "user://Levels/" + level_name + "/"
@@ -95,8 +112,26 @@ static func find_level_icon(level_name) -> Texture2D:
 					return ImageTexture.create_from_image(image)
 			file_name = dir.get_next()
 	return
+	
+static func find_level_song(level_name) -> AudioStreamMP3:
+	print("Searching for song for " + level_name)
+	var path = "user://Levels/" + level_name + "/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".mp3"):
+				print("Song found at " + path + file_name)
+				var file = FileAccess.open(path + file_name, FileAccess.READ)
+				var sound = AudioStreamMP3.new()
+				sound.data = file.get_buffer(file.get_length())
+				return sound
+			file_name = dir.get_next()
+	return
 
-func insert_obstacle(obstacle: PackedScene, z: int, lane: int) -> void:
-	var child: Node3D = obstacle.instantiate()
-	child.position = Vector3(lane * 10, 3, z * size)
-	add_child(child)
+func insert_object(obj: PackedScene, z: int, lane: int) -> void:
+	var child: Node3D = obj.instantiate()
+	child.position = Vector3(lane * 10 + 10, child.position.y, z * (size - 1))
+	child.name += " (" + str(lane) + "," + str(z) + ")"
+	$"../Objects".add_child(child)
