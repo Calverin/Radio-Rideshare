@@ -602,7 +602,7 @@ grow_vertical = 2
 [node name="Level" type="Node3D" parent="Shader"]
 
 [node name="Road" parent="Shader/Level" instance=ExtResource("4_b20rt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 mesh_library = SubResource("MeshLibrary_pcus3")
 
 [node name="Objects" type="Node3D" parent="Shader/Level"]
