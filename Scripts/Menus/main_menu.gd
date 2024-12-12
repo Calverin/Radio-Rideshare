@@ -26,6 +26,9 @@ func _process(delta: float) -> void:
 func _on_start_button_pressed():
 	transition = 1
 	await get_tree().create_timer(0.25, false).timeout
+	material.set("shader_parameter/warp_amount", 1)
+	material.set("shader_parameter/vignette_intensity", 1)
+	material.set("shader_parameter/vignette_opacity", 0.2)
 	get_tree().change_scene_to_file("res://Scenes/Menus/level_selector.tscn")
 
 
