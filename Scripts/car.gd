@@ -4,6 +4,8 @@ extends Area3D
 var lanes: int
 var current_lane: int
 
+var dead: bool = false
+
 var drifting: bool = false
 var drift_time: int = 0
 var drift_direction: float = 0
@@ -16,10 +18,18 @@ func _ready():
 	position.x = current_lane * 10
 
 func _process(delta: float):
+	# Honking
 	if (Input.is_action_pressed("honk")):
 		for object in get_tree().get_nodes_in_group("taps"):
 			if(object.isactive()):
 				score += object.score()
+	
+	# Game Over
+	if dead:
+		$"../..".material.set("shader_parameter/aberration", lerpf($"../..".material.get("shader_parameter/aberration"), 1, delta * 2))
+		$"../..".material.set("shader_parameter/warp_amount", lerpf($"../..".material.get("shader_parameter/warp_amount"), 20, delta))
+		$"../..".material.set("shader_parameter/vignette_intensity", lerpf($"../..".material.get("shader_parameter/vignette_intensity"), 100, delta / 2))
+		$"../..".material.set("shader_parameter/vignette_opacity", lerpf($"../..".material.get("shader_parameter/vignette_opacity"), 1, delta / 4))
 
 func _physics_process(delta: float):
 	## Drifting
@@ -97,8 +107,10 @@ func inputs():
 func _on_area_entered(area):
 	print("collided")
 	
-	# running into an obstacle that ends the game
+	# Running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
 		print("game over")
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+		dead = true
+		await get_tree().create_timer(1.5, false).timeout
+		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
 	pass
