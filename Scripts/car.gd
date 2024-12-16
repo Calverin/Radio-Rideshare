@@ -20,7 +20,7 @@ func _process(_delta: float):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
 			var hit: Array = object.score(self)
 			UI.score += hit[0]
-			UI.recent_hit = hit[1]
+			UI.current_accuracy = hit[1]
 			object.remove_from_group("inside_notes")
 			break
 	if (Input.is_action_pressed("drift_left")):

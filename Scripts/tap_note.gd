@@ -4,8 +4,8 @@ func score(playerbox: Area3D) -> Array:
 	if ($Good.overlaps_area(playerbox)):
 		if ($Great.overlaps_area(playerbox)):
 			if ($Perfect.overlaps_area(playerbox)):
-				return [300, "Perfect"]
-			return [200, "Great"]
-		return [100, "Good"]
+				return [300, UI.Accuracy.PERFECT]
+			return [200, UI.Accuracy.GREAT]
+		return [100, UI.Accuracy.GOOD]
 	queue_free()
-	return [0, "Miss"]
+	return [0, UI.Accuracy.MISS]
