@@ -1,7 +1,7 @@
 extends Area3D
 
 @export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
-@onready var lanes: int = $"../Road".current_level.lanes
+var lanes: int
 var current_lane: int
 
 var drifting: bool = false
@@ -11,16 +11,15 @@ var turn_offset: float = 0
 var score: float = 0
 
 func _ready():
-	current_lane = int(ceilf(lanes / 2.0))
+	lanes = LevelLoader.current_level.lanes
+	current_lane = lanes / 2
 	position.x = current_lane * 10
 
 func _process(delta: float):
-	if(Input.is_action_pressed("honk")):
+	if (Input.is_action_pressed("honk")):
 		for object in get_tree().get_nodes_in_group("taps"):
 			if(object.isactive()):
 				score += object.score()
-		
-	
 
 func _physics_process(delta: float):
 	## Drifting

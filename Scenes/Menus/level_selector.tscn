@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="1_4gr11"]
 [ext_resource type="Script" path="res://Scripts/Menus/level_selector.gd" id="1_f3cbc"]
-[ext_resource type="Script" path="res://Scripts/Menus/level_loader.gd" id="2_414t7"]
+[ext_resource type="Script" path="res://Scripts/Util/level_loader.gd" id="2_414t7"]
 [ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_mqabr"]
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="4_qmppa"]
 
