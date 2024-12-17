@@ -9,7 +9,7 @@ enum Accuracy {NONE, MISS, GOOD, GREAT, PERFECT}
 var current_accuracy: Accuracy = Accuracy.NONE
 var accuracies: Array[String] = [
 	"",
-	"res://Assets/Texts/Perfect.png",
+	"res://Assets/Texts/Miss.png",
 	"res://Assets/Texts/Good.png",
 	"res://Assets/Texts/Great.png",
 	"res://Assets/Texts/Perfect.png"

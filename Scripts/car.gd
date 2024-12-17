@@ -111,6 +111,7 @@ func _on_area_entered(area: Area3D):
 		return
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
+		UI.current_accuracy = UI.Accuracy.NONE
 		print("game over")
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
 	pass
