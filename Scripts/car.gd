@@ -16,45 +16,19 @@ func _ready():
 	position.x = current_lane * 10
 
 func _process(_delta: float):
-	if (Input.is_action_just_pressed("honk")):
+	if (Input.is_action_pressed("honk")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
 			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
 			break
-	if (Input.is_action_just_pressed("drift_left")):
-		for object: Area3D in get_tree().get_nodes_in_group("left_drifts"):
-			var hit: Array = object.score(self)
-			UI.score += hit[0]
-			UI.current_accuracy = hit[1]
-			if (hit[1] == UI.Accuracy.MISS):
-				UI.streak = 0
-			else:
-				UI.streak += 1
-			object.remove_from_group("left_drifts")
-			break
-	if (Input.is_action_just_pressed("drift_right")):
-		for object: Area3D in get_tree().get_nodes_in_group("right_drifts"):
-			var hit: Array = object.score(self)
-			UI.score += hit[0]
-			UI.current_accuracy = hit[1]
-			if (hit[1] == UI.Accuracy.MISS):
-				UI.streak = 0
-			else:
-				UI.streak += 1
-			object.remove_from_group("right_drifts")
-			break
-	if (Input.is_action_just_released("drift_right") or Input.is_action_just_released("drift_left")):
-		for object: Area3D in get_tree().get_nodes_in_group("drift_release"):
-			var hit: Array = object.score(self)
-			UI.score += hit[0]
-			UI.current_accuracy = hit[1]
-			if (hit[1] == UI.Accuracy.MISS):
-				UI.streak = 0
-			else:
-				UI.streak += 1
-			object.remove_from_group("drift_release")
-			break
-
+	if (Input.is_action_pressed("drift_left")):
+		for object in get_tree().get_nodes_in_group("left_drifts"):
+			if (object.isactive()):
+				UI.score += object.score(self)
+	if (Input.is_action_pressed("drift_right")):
+		for object in get_tree().get_nodes_in_group("right_drifts"):
+			if (object.isactive()):
+				UI.score += object.score(self)
 
 func _physics_process(delta: float):
 	## Drifting
