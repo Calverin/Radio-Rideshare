@@ -18,13 +18,7 @@ func _ready():
 func _process(_delta: float):
 	if (Input.is_action_pressed("honk")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
-			var hit: Array = object.score(self)
-			UI.score += hit[0]
-			UI.current_accuracy = hit[1]
-			if (hit[1] == UI.Accuracy.MISS):
-				UI.streak = 0
-			else:
-				UI.streak += 1
+			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
 			break
 	if (Input.is_action_pressed("drift_left")):
@@ -79,6 +73,16 @@ func drift(delta: float):
 	if (drift_direction < 0 and not Input.is_action_pressed("drift_left"))    \
 		or (drift_direction > 0 and not Input.is_action_pressed("drift_right")):
 		switch_lane(drift_direction)
+
+func update_scoring(hit: Array):
+	if (hit[1] != UI.Accuracy.MISS):
+		UI.streak += 1
+		UI.multiplier = min(UI.streak / 10.0 + 1, 4)
+	else:
+		UI.streak = 0
+		UI.multiplier = 1
+	UI.score += hit[0] * UI.multiplier
+	UI.current_accuracy = hit[1]
 
 func switch_lane(dir):
 	drifting = false
