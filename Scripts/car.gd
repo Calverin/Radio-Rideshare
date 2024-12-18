@@ -1,6 +1,6 @@
 extends Area3D
 
-@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
+var speed: int
 var lanes: int
 var current_lane: int
 
@@ -10,20 +10,28 @@ var drifting: bool = false
 var drift_time: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
-var score: float = 0
 
 func _ready():
+	speed = 50
 	lanes = LevelLoader.current_level.lanes
-	current_lane = lanes / 2
+	current_lane = ceil(float(lanes) / 2)
 	position.x = current_lane * 10
 
-func _process(delta: float):
-	# Honking
+func _process(_delta: float):
 	if (Input.is_action_pressed("honk")):
-		for object in get_tree().get_nodes_in_group("taps"):
-			if(object.isactive()):
-				score += object.score()
-	
+		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
+			update_scoring(object.score(self))
+			object.remove_from_group("inside_notes")
+			break
+	if (Input.is_action_pressed("drift_left")):
+		for object in get_tree().get_nodes_in_group("left_drifts"):
+			if (object.isactive()):
+				UI.score += object.score(self)
+	if (Input.is_action_pressed("drift_right")):
+		for object in get_tree().get_nodes_in_group("right_drifts"):
+			if (object.isactive()):
+				UI.score += object.score(self)
+				
 	# Game Over
 	if dead:
 		$"../..".material.set("shader_parameter/aberration", lerpf($"../..".material.get("shader_parameter/aberration"), 1, delta * 2))
@@ -75,6 +83,16 @@ func drift(delta: float):
 		or (drift_direction > 0 and not Input.is_action_pressed("drift_right")):
 		switch_lane(drift_direction)
 
+func update_scoring(hit: Array):
+	if (hit[1] != UI.Accuracy.MISS):
+		UI.streak += 1
+		UI.multiplier = min(UI.streak / 10.0 + 1, 4)
+	else:
+		UI.streak = 0
+		UI.multiplier = 1
+	UI.score += hit[0] * UI.multiplier
+	UI.current_accuracy = hit[1]
+
 func switch_lane(dir):
 	drifting = false
 	drift_time = 0
@@ -104,13 +122,12 @@ func inputs():
 		turn_offset = -0.1
 		switch_lane(1)
 
-func _on_area_entered(area):
-	print("collided")
-	
-	# Running into an obstacle that ends the game
+func _on_area_entered(area: Area3D):
+	if (area.is_in_group("tap_notes")):
+		area.add_to_group("inside_notes")
+		return
+	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
+		UI.current_accuracy = UI.Accuracy.NONE
 		print("game over")
-		dead = true
-		await get_tree().create_timer(1.5, false).timeout
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
-	pass
