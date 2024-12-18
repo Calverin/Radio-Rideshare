@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://xcnagv6x7xhe"]
+[gd_scene load_steps=16 format=3 uid="uid://sdo1tlagv5ak"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="3_g2rqs"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="3_w3ts0"]
 [ext_resource type="Script" path="res://Scripts/song.gd" id="4_flycw"]
 [ext_resource type="Script" path="res://Scripts/Util/level_loader.gd" id="4_qtmvx"]
 
@@ -17,6 +18,12 @@ background_mode = 2
 sky = SubResource("Sky_3wipw")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Theme" id="Theme_0v5qu"]
+default_font = ExtResource("3_w3ts0")
+
+[sub_resource type="LabelSettings" id="LabelSettings_8sdfj"]
+font_size = 20
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0tre"]
 albedo_texture = ExtResource("2_o1cen")
@@ -52,6 +59,129 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_0v5qu")
+
+[node name="RightSidebar" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -280.0
+offset_bottom = 280.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.109804, 0.211765, 0.305882, 0.52549)
+
+[node name="Container" type="VBoxContainer" parent="UI/RightSidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameHeader" type="Label" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8sdfj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelName" type="LineEdit" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+placeholder_text = "Name"
+alignment = 1
+
+[node name="Lanes" type="Label" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+text = "  Lanes :"
+label_settings = SubResource("LabelSettings_8sdfj")
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UI/RightSidebar/Container/Lanes"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 3.0
+offset_right = 169.0
+offset_bottom = 21.0
+text = "3"
+
+[node name="Subtract" type="Button" parent="UI/RightSidebar/Container/Lanes"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -13.0
+offset_right = -32.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "-"
+
+[node name="Add" type="Button" parent="UI/RightSidebar/Container/Lanes"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -13.0
+offset_right = -8.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="NPS" type="Label" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+text = "  NPS :"
+label_settings = SubResource("LabelSettings_8sdfj")
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UI/RightSidebar/Container/NPS"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 3.0
+offset_right = 129.0
+offset_bottom = 21.0
+text = "4"
+
+[node name="Subtract" type="Button" parent="UI/RightSidebar/Container/NPS"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -13.0
+offset_right = -32.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "-"
+
+[node name="Add" type="Button" parent="UI/RightSidebar/Container/NPS"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -13.0
+offset_right = -8.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -67,7 +197,7 @@ mesh = SubResource("BoxMesh_iie70")
 transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 0, 25, 0)
 current = true
 
-[node name="Notes" type="Node3D" parent="Level"]
+[node name="Objects" type="Node3D" parent="Level"]
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4_flycw")
