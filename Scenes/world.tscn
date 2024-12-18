@@ -651,6 +651,7 @@ offset_top = 96.0
 offset_right = 135.5
 offset_bottom = 123.0
 grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 text = "MULTIPLIER: 1x
 "
 

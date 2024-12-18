@@ -21,6 +21,10 @@ func _process(_delta: float):
 			var hit: Array = object.score(self)
 			UI.score += hit[0]
 			UI.current_accuracy = hit[1]
+			if (hit[1] == UI.Accuracy.MISS):
+				UI.streak = 0
+			else:
+				UI.streak += 1
 			object.remove_from_group("inside_notes")
 			break
 	if (Input.is_action_pressed("drift_left")):
