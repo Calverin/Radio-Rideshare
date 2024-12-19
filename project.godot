@@ -20,10 +20,15 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 LevelLoader="*res://Scripts/Util/level_loader.gd"
+UI="*res://Scripts/Menus/ui.gd"
 
 [dotnet]
 
 project/assembly_name="Radio-Rideshare"
+
+[global_group]
+
+inside_notes="Notes you're currently inside of"
 
 [input]
 

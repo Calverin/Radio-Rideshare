@@ -9,7 +9,6 @@ size = Vector3(2.4, 1.9, 4.5)
 
 [node name="Car" type="Area3D" groups=["player_car"]]
 script = ExtResource("1_oamc2")
-speed = 60
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 6.70486, 5.96559)
@@ -52,3 +51,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
 shape = SubResource("BoxShape3D_0wcon")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
