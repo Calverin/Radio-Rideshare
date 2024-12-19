@@ -1,8 +1,10 @@
 extends Area3D
 
-var speed: int
+@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
 var lanes: int
 var current_lane: int
+
+var dead: bool = false
 
 var drifting: bool = false
 var drift_time: int = 0
@@ -10,25 +12,24 @@ var drift_direction: float = 0
 var turn_offset: float = 0
 
 func _ready():
-	speed = 50
 	lanes = LevelLoader.current_level.lanes
-	current_lane = ceil(float(lanes) / 2)
+	current_lane = lanes / 2
 	position.x = current_lane * 10
 
-func _process(_delta: float):
+func _process(delta: float):
+	# Honking
 	if (Input.is_action_pressed("honk")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
 			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
 			break
-	if (Input.is_action_pressed("drift_left")):
-		for object in get_tree().get_nodes_in_group("left_drifts"):
-			if (object.isactive()):
-				UI.score += object.score(self)
-	if (Input.is_action_pressed("drift_right")):
-		for object in get_tree().get_nodes_in_group("right_drifts"):
-			if (object.isactive()):
-				UI.score += object.score(self)
+	
+	# Game Over
+	if dead:
+		$"../..".material.set("shader_parameter/aberration", lerpf($"../..".material.get("shader_parameter/aberration"), 1, delta * 2))
+		$"../..".material.set("shader_parameter/warp_amount", lerpf($"../..".material.get("shader_parameter/warp_amount"), 20, delta))
+		$"../..".material.set("shader_parameter/vignette_intensity", lerpf($"../..".material.get("shader_parameter/vignette_intensity"), 100, delta / 2))
+		$"../..".material.set("shader_parameter/vignette_opacity", lerpf($"../..".material.get("shader_parameter/vignette_opacity"), 1, delta / 4))
 
 func _physics_process(delta: float):
 	## Drifting
@@ -121,4 +122,7 @@ func _on_area_entered(area: Area3D):
 	if (area.is_in_group("hard_obstacles")):
 		UI.current_accuracy = UI.Accuracy.NONE
 		print("game over")
+		dead = true
+		await get_tree().create_timer(1.5, false).timeout
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
+	pass

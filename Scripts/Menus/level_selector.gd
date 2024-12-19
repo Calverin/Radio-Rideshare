@@ -6,6 +6,9 @@ var LEVEL_LISTING = preload("res://Scenes/Menus/level_listing.tscn")
 func _ready() -> void:
 	refresh_level_list()
 
+func _process(delta):
+	material.set("shader_parameter/aberration", lerpf(material.get("shader_parameter/aberration"), 0, delta * 2))
+	
 func refresh_level_list():
 	levels = []
 	# Load all levels in Level folder and make a Level Listing for each one
