@@ -12,8 +12,8 @@ The #ARTIST and #MAPPER headers are not required, but are preferred.<br /><br />
 
 The path for levels uses letters to represent obstacles and beats, with the following being already mapped:<br />
 0 -> nothing<br />
-1 -> car obstacle<br />
-2 -> standard beat<br />
+1 -> tap note<br />
+2 -> car obstacle<br />
 3 -> drfit left<br />
 4 -> drift right<br />
 5 -> end a drift segment<br />
