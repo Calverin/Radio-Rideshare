@@ -30,7 +30,7 @@ func _process(delta: float):
 			drift_scoring(object.score(self))
 			object.remove_from_group("inside_drifts")
 			break
-	if (Input.is_action_just_released("drift_left") or Input.is_action_just_released("drift_right")):
+	if ((Input.is_action_just_released("drift_left") or Input.is_action_just_released("drift_right")) and drift_on):
 		drift_on = false
 		drift_score = 0
 		for object: Area3D in get_tree().get_nodes_in_group("inside_drifts_ends"):

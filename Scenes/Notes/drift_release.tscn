@@ -27,7 +27,7 @@ albedo_color = Color(0.969, 1, 0.07, 1)
 material = SubResource("StandardMaterial3D_3wk35")
 size = Vector3(1, 0.205, 3.205)
 
-[node name="DriftRelease" type="Area3D" groups=["drift_notes"]]
+[node name="DriftRelease" type="Area3D" groups=["drift_ends"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_vqluf")
 
