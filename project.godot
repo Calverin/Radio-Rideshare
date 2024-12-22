@@ -29,6 +29,9 @@ project/assembly_name="Radio-Rideshare"
 [global_group]
 
 inside_notes="Notes you're currently inside of"
+drift_notes=""
+tap_notes=""
+inside_drifts=""
 
 [input]
 

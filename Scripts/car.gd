@@ -1,6 +1,6 @@
 extends Area3D
 
-@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
+@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int = 60
 var lanes: int
 var current_lane: int
 
@@ -8,6 +8,8 @@ var dead: bool = false
 
 var drifting: bool = false
 var drift_time: int = 0
+var drift_on: bool = false
+var drift_score: int = 0
 var drift_direction: float = 0
 var turn_offset: float = 0
 
@@ -23,7 +25,21 @@ func _process(delta: float):
 			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
 			break
-	
+	if (Input.is_action_pressed("drift_left") or Input.is_action_pressed("drift_right")):
+		for object: Area3D in get_tree().get_nodes_in_group("inside_drifts"):
+			drift_scoring(object.score(self))
+			object.remove_from_group("inside_drifts")
+			break
+	if (Input.is_action_just_released("drift_left") or Input.is_action_just_released("drift_right")):
+		drift_on = false
+		drift_score = 0
+		for object: Area3D in get_tree().get_nodes_in_group("inside_drifts_ends"):
+			update_scoring(object.score(self))
+			object.remove_from_group("inside_drift_ends")
+			break
+	if (drift_on):
+		UI.score += drift_score
+		
 	# Game Over
 	if dead:
 		$"../..".material.set("shader_parameter/aberration", lerpf($"../..".material.get("shader_parameter/aberration"), 1, delta * 2))
@@ -77,13 +93,20 @@ func drift(delta: float):
 
 func update_scoring(hit: Array):
 	if (hit[1] != UI.Accuracy.MISS):
-		UI.streak += 1
-		UI.multiplier = min(UI.streak / 10.0 + 1, 4)
+		UI.up_scores(hit[1])
 	else:
-		UI.streak = 0
-		UI.multiplier = 1
+		UI.reset_scores()
+		return
 	UI.score += hit[0] * UI.multiplier
-	UI.current_accuracy = hit[1]
+	
+func drift_scoring(hit: Array):
+	if (hit[1] == UI.Accuracy.MISS):
+		UI.up_scores(hit[1])
+	else:
+		UI.reset_scores()
+		return
+	drift_score = hit[0] * UI.multiplier
+	drift_on = true
 
 func switch_lane(dir):
 	drifting = false
@@ -115,8 +138,17 @@ func inputs():
 		switch_lane(1)
 
 func _on_area_entered(area: Area3D):
+	# dealing with tap_notes
 	if (area.is_in_group("tap_notes")):
 		area.add_to_group("inside_notes")
+		return
+	# dealing with drift_notes
+	if (area.is_in_group("drift_notes")):
+		area.add_to_group("inside_drifts")
+		return
+	# dealing with the end tiles of drift_notes
+	if (area.is_in_group("drift_ends")):
+		area.add_to_group("inside_drift_ends")
 		return
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
