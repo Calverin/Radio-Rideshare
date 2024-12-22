@@ -100,7 +100,7 @@ func update_scoring(hit: Array):
 	UI.score += hit[0] * UI.multiplier
 	
 func drift_scoring(hit: Array):
-	if (hit[1] == UI.Accuracy.MISS):
+	if (hit[1] != UI.Accuracy.MISS):
 		UI.up_scores(hit[1])
 	else:
 		UI.reset_scores()
