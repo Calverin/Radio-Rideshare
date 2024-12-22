@@ -14,3 +14,4 @@ func score(playerbox: Area3D) -> Array:
 func _on_area_exited(_area):
 	if (is_in_group("inside_notes")):
 		UI.current_accuracy = UI.Accuracy.MISS
+		remove_from_group("inside_notes")
