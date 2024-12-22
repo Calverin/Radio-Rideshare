@@ -9,6 +9,7 @@ var CAR = preload("res://Scenes/car.tscn")
 
 var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
 var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
+var FINISH_LINE = preload("res://Scenes/finish.tscn")
 
 func _ready():
 	var level = LevelLoader.current_level_name
@@ -77,6 +78,10 @@ func generate_level(grid: GridMap, level: Level) -> void:
 				insert_object(TAP_NOTE, z, o)
 			if objects[o] == '2':
 				insert_object(PARKED_CAR, z, o)
+				
+	var sip = Vector3(100,188*(size)*(level.lanes),size)
+	insert_object(FINISH_LINE,-size * length,0)
+	
 
 static func load_level_data(file_name: String) -> String:
 	var path = "user://Levels/" + file_name + "/" + file_name + ".rrl"

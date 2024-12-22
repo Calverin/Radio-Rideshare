@@ -25,11 +25,13 @@ func _process(delta: float):
 			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
 			break
+	# Drift
 	if (Input.is_action_pressed("drift_left") or Input.is_action_pressed("drift_right")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_drifts"):
 			drift_scoring(object.score(self))
 			object.remove_from_group("inside_drifts")
 			break
+	# Drift Release
 	if (Input.is_action_just_released("drift_left") or Input.is_action_just_released("drift_right")):
 		drift_on = false
 		drift_score = 0
@@ -150,6 +152,11 @@ func _on_area_entered(area: Area3D):
 	if (area.is_in_group("drift_ends")):
 		area.add_to_group("inside_drift_ends")
 		return
+	# dealing with hitting the finish line
+	if (area.is_in_group("finish")):
+		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
+		return
+		
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
 		UI.current_accuracy = UI.Accuracy.NONE
