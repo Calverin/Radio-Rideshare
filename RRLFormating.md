@@ -1,21 +1,20 @@
-Radio Rideshare level formatting.
+Radio Rideshare level formatting\n\n
 
-Headers:
-#TITLE: the title of the song
-#ARTIST: the artist of the song
-#MAPPER: the mapper of the song charting
-#NPS: the notes per second of the level
-#LANES: the number of lanes for the mapping
+Headers:\n
+#TITLE: the title of the song\n
+#ARTIST: the artist of the song\n
+#MAPPER: the mapper of the song charting\n
+#NPS: the notes per second of the level\n
+#LANES: the number of lanes for the mapping\n\n
 
-The #TITLE, #NPS, and #LANES headers are required for every level.
-The #ARTIST and #MAPPER headers are not required, but are preferred.
+The #TITLE, #NPS, and #LANES headers are required for every level.\n
+The #ARTIST and #MAPPER headers are not required, but are preferred.\n\n
 
+The path for levels uses letters to represent obstacles and beats, with the following being already mapped:\n\n
 
-The path for levels uses letters to represent obstacles and beats, with the following being already mapped:
-
-0 -> nothing
-1 -> car obstacle
-2 -> standard beat
-3 -> drfit left
-4 -> drift right
-5 -> end a drift segment
+0 -> nothing\n
+1 -> car obstacle\n
+2 -> standard beat\n
+3 -> drfit left\n
+4 -> drift right\n
+5 -> end a drift segment\n
