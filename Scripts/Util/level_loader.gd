@@ -80,7 +80,7 @@ func generate_level(grid: GridMap, level: Level) -> void:
 				insert_object(PARKED_CAR, z, o)
 				
 	var sip = Vector3(100,188*(size)*(level.lanes),size)
-	insert_object(FINISH_LINE,-size * length,0)
+	insert_object(FINISH_LINE,-size * length - 2,0)
 	
 
 static func load_level_data(file_name: String) -> String:

@@ -154,8 +154,11 @@ func _on_area_entered(area: Area3D):
 		return
 	# dealing with hitting the finish line
 	if (area.is_in_group("finish")):
+		UI.current_accuracy = UI.Accuracy.NONE
+		print("game over")
+		dead = true
+		await get_tree().create_timer(1.5, false).timeout
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
-		return
 		
 	# running into an obstacle that ends the game
 	if (area.is_in_group("hard_obstacles")):
