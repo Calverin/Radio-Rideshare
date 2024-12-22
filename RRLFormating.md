@@ -1,6 +1,6 @@
-Radio Rideshare level formatting<br />---<br />
+Radio Rideshare level formatting<br /><br />
 
-Headers:\n
+Headers:<br />
 #TITLE: the title of the song<br />
 #ARTIST: the artist of the song<br />
 #MAPPER: the mapper of the song charting<br />
