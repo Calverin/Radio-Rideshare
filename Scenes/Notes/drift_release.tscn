@@ -28,6 +28,7 @@ material = SubResource("StandardMaterial3D_3wk35")
 size = Vector3(1, 0.205, 3.205)
 
 [node name="DriftRelease" type="Area3D" groups=["drift_notes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_vqluf")
 
 [node name="Good" type="Area3D" parent="."]

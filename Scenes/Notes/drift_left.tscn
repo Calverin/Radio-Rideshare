@@ -21,6 +21,7 @@ size = Vector3(1, 0.455, 0.08)
 size = Vector3(6.43408, 0.75, 6.31336)
 
 [node name="DriftLeft" type="Area3D" groups=["drift_notes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_rk782")
 
 [node name="Good" type="Area3D" parent="."]
