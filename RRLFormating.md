@@ -10,8 +10,7 @@ Headers:<br />
 The #TITLE, #NPS, and #LANES headers are required for every level.<br />
 The #ARTIST and #MAPPER headers are not required, but are preferred.<br /><br />
 
-The path for levels uses letters to represent obstacles and beats, with the following being already mapped:<br /><br />
-
+The path for levels uses letters to represent obstacles and beats, with the following being already mapped:<br />
 0 -> nothing<br />
 1 -> car obstacle<br />
 2 -> standard beat<br />
