@@ -1,6 +1,6 @@
 extends Area3D
 
-@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int = 60
+var speed: int
 var lanes: int
 var current_lane: int
 
@@ -14,8 +14,9 @@ var drift_direction: float = 0
 var turn_offset: float = 0
 
 func _ready():
+	speed = 50
 	lanes = LevelLoader.current_level.lanes
-	current_lane = lanes / 2
+	current_lane = ceil(float(lanes) / 2)
 	position.x = current_lane * 10
 
 func _process(delta: float):
@@ -49,6 +50,11 @@ func _process(delta: float):
 
 func _physics_process(delta: float):
 	## Drifting
+	var wheel_speed = 20
+	$Body/Wheel.rotation_degrees.x += wheel_speed
+	$Body/Wheel2.rotation_degrees.x += wheel_speed
+	$Body/Wheel3.rotation_degrees.x += wheel_speed
+	$Body/Wheel4.rotation_degrees.x += wheel_speed
 	if drifting:
 		drift(delta)
 	else:
@@ -78,18 +84,20 @@ func drift(delta: float):
 		# Early Drift "Hop"
 		$Body.position.y = lerpf($Body.position.y, 1, delta * 30)
 		# Spin Turn
-		var spin = Input.get_axis("quick_left", "quick_right")
-		if drift_direction > 0 and spin < 0:
-			switch_lane(-2)
-			turn_offset -= 2 * PI
-		if drift_direction < 0 and spin > 0:
-			switch_lane(2)
-			turn_offset += 2 * PI
+		#var spin = Input.get_axis("quick_left", "quick_right")
+		#if drift_direction > 0 and spin < 0:
+		#	switch_lane(-2)
+		#	turn_offset -= 2 * PI
+		#if drift_direction < 0 and spin > 0:
+		#	switch_lane(2)
+		#	turn_offset += 2 * PI
 
 	## Ending
 	if (drift_direction < 0 and not Input.is_action_pressed("drift_left"))    \
 		or (drift_direction > 0 and not Input.is_action_pressed("drift_right")):
 		switch_lane(drift_direction)
+		set_drift_graphics("Left", false)
+		set_drift_graphics("Right", false)
 
 func update_scoring(hit: Array):
 	if (hit[1] != UI.Accuracy.MISS):
@@ -127,9 +135,13 @@ func inputs():
 	if Input.is_action_just_pressed("drift_left"):
 		drifting = true
 		drift_direction = -1
+		set_drift_graphics("Left", true)
+		set_drift_graphics("Right", false)
 	elif Input.is_action_just_pressed("drift_right"):
 		drifting = true
 		drift_direction = 1
+		set_drift_graphics("Left", false)
+		set_drift_graphics("Right", true)
 	elif Input.is_action_just_pressed("quick_left"):
 		turn_offset = 0.1
 		switch_lane(-1)
@@ -155,6 +167,10 @@ func _on_area_entered(area: Area3D):
 		UI.current_accuracy = UI.Accuracy.NONE
 		print("game over")
 		dead = true
+		speed = 0
 		await get_tree().create_timer(1.5, false).timeout
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
-	pass
+		
+func set_drift_graphics(direction: String, active: bool):
+	for child in get_node(NodePath("Body/" + direction + "DriftParticles")).get_children():
+		child.emitting = active
