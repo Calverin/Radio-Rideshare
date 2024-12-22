@@ -16,5 +16,6 @@ The path for levels uses letters to represent obstacles and beats, with the foll
 0 -> nothing
 1 -> car obstacle
 2 -> standard beat
-3 -> turn left
-4 -> turn right
+3 -> drfit left
+4 -> drift right
+5 -> end a drift segment
