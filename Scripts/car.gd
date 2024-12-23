@@ -169,7 +169,7 @@ func _on_area_entered(area: Area3D):
 		dead = true
 		speed = 0
 		await get_tree().create_timer(1.5, false).timeout
-		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Menus/death_screen.tscn")
 		
 func set_drift_graphics(direction: String, active: bool):
 	for child in get_node(NodePath("Body/" + direction + "DriftParticles")).get_children():
