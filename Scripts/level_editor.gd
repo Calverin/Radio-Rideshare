@@ -10,7 +10,7 @@ var song_position: float = 0.0
 
 @onready var LOADER = $Loader
 @onready var GROUND = $Level/Ground.mesh
-@onready var HIGHLIGHT: MeshInstance3D = $Level/Highlight
+@onready var VIEW = $Level/View
 @onready var OBJECTS = $Level/Objects
 
 var BAR = preload("res://Scenes/bar.tscn")
@@ -49,6 +49,7 @@ func reload_level() -> void:
 	# Set ground size
 	GROUND.size.x = lanes * 10
 	GROUND.material.uv1_scale.x = lanes
+	VIEW.get_node("PlayBar").mesh.size.x = lanes * 10
 	
 	
 	level_data = current_level.data
@@ -99,9 +100,6 @@ func _process(delta: float) -> void:
 		current_tile.x = max(current_tile.x - 1, 0)
 	if Input.is_action_just_pressed("ui_right"):
 		current_tile.x = min(current_tile.x + 1, current_level.lanes - 1)
-	
-	var speed = delta * 10
-	HIGHLIGHT.position = Vector3(lerpf(HIGHLIGHT.position.x, current_tile.x * 10 - (current_level.lanes / 2) * 10, speed), 1, lerpf(HIGHLIGHT.position.z, current_tile.y * -10, speed))
 
 	if Input.is_action_just_pressed("object_1"):
 		insert_object(TAP_NOTE, 1)
@@ -115,12 +113,29 @@ func _process(delta: float) -> void:
 		save_level()
 		get_tree().change_scene_to_file("res://Scenes/Menus/level_selector.tscn")
 	
+	# Toggling the song
 	if Input.is_action_just_pressed("toggle_music"):
 		if $Song.playing:
-			song_position = $Song.get_playback_position()
+			VIEW.get_node("PlayBar").visible = false
+			VIEW.get_node("Highlight").visible = true
+			current_tile = Vector2i(current_level.lanes / 2, floor(song_position * 4.0))
 			$Song.stop()
 		else:
+			song_position = current_tile.y / 4.0
 			$Song.play(song_position)
+			VIEW.get_node("PlayBar").visible = true
+			VIEW.get_node("Highlight").visible = false
+	
+	var mouse_scroll = Input.get_axis("scroll_down", "scroll_up")
+	
+	if $Song.playing:
+		song_position = $Song.get_playback_position()
+		VIEW.position = Vector3(0, 1, lerpf(VIEW.position.z, -song_position * 40, delta * 10))
+	else:
+		var speed = delta * 10
+		VIEW.position = Vector3(lerpf(VIEW.position.x, current_tile.x * 10 - (current_level.lanes / 2) * 10, speed), 1, lerpf(VIEW.position.z, current_tile.y * -10, speed))
+		song_position += mouse_scroll
+	
 
 func insert_object(scene: PackedScene, id: int):
 	# Remove all nodes at that position already:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xcnagv6x7xhe"]
+[gd_scene load_steps=18 format=3 uid="uid://xcnagv6x7xhe"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
@@ -25,6 +25,23 @@ default_font = ExtResource("3_w3ts0")
 [sub_resource type="LabelSettings" id="LabelSettings_8sdfj"]
 font_size = 20
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1brni"]
+transparency = 1
+albedo_color = Color(0, 0.529412, 1, 0.827451)
+
+[sub_resource type="BoxMesh" id="BoxMesh_phsp2"]
+material = SubResource("StandardMaterial3D_1brni")
+size = Vector3(10, 2, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlsxm"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(1, 0.113725, 0, 0.988235)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iie70"]
+material = SubResource("StandardMaterial3D_xlsxm")
+size = Vector3(10, 1, 10)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0tre"]
 albedo_texture = ExtResource("2_o1cen")
 albedo_texture_force_srgb = true
@@ -37,15 +54,6 @@ texture_filter = 0
 lightmap_size_hint = Vector2i(152, 2002)
 material = SubResource("StandardMaterial3D_x0tre")
 size = Vector2(30, 4000)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlsxm"]
-transparency = 1
-blend_mode = 3
-albedo_color = Color(1, 0.113725, 0, 0.988235)
-
-[sub_resource type="BoxMesh" id="BoxMesh_iie70"]
-material = SubResource("StandardMaterial3D_xlsxm")
-size = Vector3(10, 1, 10)
 
 [node name="LevelEditor" type="Node"]
 script = ExtResource("1_yddgv")
@@ -186,17 +194,25 @@ text = "+"
 
 [node name="Level" type="Node3D" parent="."]
 
+[node name="View" type="Node3D" parent="Level"]
+
+[node name="Camera" type="Camera3D" parent="Level/View"]
+transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 0, 26, 0)
+current = true
+
+[node name="PlayBar" type="MeshInstance3D" parent="Level/View"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8147e-06, 4)
+mesh = SubResource("BoxMesh_phsp2")
+skeleton = NodePath("../..")
+
+[node name="Highlight" type="MeshInstance3D" parent="Level/View"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_iie70")
+skeleton = NodePath("../..")
+
 [node name="Ground" type="MeshInstance3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1995)
 mesh = SubResource("PlaneMesh_g2je8")
-
-[node name="Highlight" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_iie70")
-
-[node name="Camera" type="Camera3D" parent="Level/Highlight"]
-transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 0, 25, 0)
-current = true
 
 [node name="Objects" type="Node3D" parent="Level"]
 

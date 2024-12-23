@@ -1,6 +1,6 @@
 extends Area3D
 
-@export_enum("Slow:30", "Average:60", "Very Fast:200") var speed: int
+var speed: int
 var lanes: int
 var current_lane: int
 
@@ -13,8 +13,9 @@ var turn_offset: float = 0
 var score: float = 0
 
 func _ready():
+	speed = 50
 	lanes = LevelLoader.current_level.lanes
-	current_lane = lanes / 2
+	current_lane = int(float(lanes) / 2.0)
 	position.x = current_lane * 10
 
 func _process(delta: float):
