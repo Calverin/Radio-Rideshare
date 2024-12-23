@@ -5,7 +5,8 @@ var dimming = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	UI.reset_scores()
+	UI.score = 0
 
 
 func _process(delta: float) -> void:
@@ -37,4 +38,4 @@ func _on_main_menu_pressed():
 
 
 func _on_try_again_pressed():
-	$level_selector.(LevelLoader.current_level_name)
+	get_tree().change_scene_to_file("res://Scenes/world.tscn")

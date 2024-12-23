@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b5u570yfclelr"]
 
 [ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="1_a1uhc"]
-[ext_resource type="Script" path="res://Scenes/Menus/death_screen.gd" id="2_6vw4v"]
+[ext_resource type="Script" path="res://Scripts/Menus/death_screen.gd" id="2_6vw4v"]
 [ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="2_o2bgd"]
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="3_hlrit"]
 [ext_resource type="Script" path="res://Scenes/Menus/splash_text.gd" id="4_elvel"]
