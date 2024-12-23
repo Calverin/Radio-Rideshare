@@ -6,7 +6,7 @@ func load_song() -> float:
 	stream = song
 	
 	# Probably temporary lol but speeds up the song relative to NPS above 4
-	pitch_scale = 1 + ((float(LevelLoader.current_level.nps) / 4.0) - 1) / 20.0
+	#pitch_scale = 1 + ((float(LevelLoader.current_level.nps) / 4.0) - 1) / 20.0
 	
 	# Start song automatically for gameplay
 	if get_parent().name == "World":
