@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://c1klncb1e6jt8"]
+[gd_scene load_steps=22 format=4 uid="uid://c1klncb1e6jt8"]
 
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://ri2sucolfhw8" path="res://Assets/Sounds/honk_1.mp3" id="8_g81mx"]
 [ext_resource type="AudioStream" uid="uid://bgkgvlyfdj82q" path="res://Assets/Sounds/honk_2.mp3" id="9_tplca"]
 [ext_resource type="AudioStream" uid="uid://osehun7w1vj" path="res://Assets/Sounds/clap.wav" id="10_5tcka"]
+[ext_resource type="AudioStream" uid="uid://cjw26esk3hpus" path="res://Assets/Sounds/tv_off.mp3" id="11_k3lxh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sruk7"]
 transparency = 1
@@ -202,6 +203,12 @@ volume_db = -20.56
 pitch_scale = 1.27
 mix_target = 1
 max_polyphony = 10
+
+[node name="CrashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_k3lxh")
+volume_db = -4.556
+mix_target = 1
+max_polyphony = 2
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
