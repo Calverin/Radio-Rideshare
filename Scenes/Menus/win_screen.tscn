@@ -1,23 +1,30 @@
-[gd_scene load_steps=15 format=3 uid="uid://dljlsua1vjed3"]
+[gd_scene load_steps=15 format=3 uid="uid://bfnkbhxxjwh0f"]
 
-[ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="1_a1uhc"]
-[ext_resource type="Script" path="res://Scripts/Menus/death_screen.gd" id="2_6vw4v"]
-[ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="2_o2bgd"]
-[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="3_hlrit"]
-[ext_resource type="Script" path="res://Scenes/Menus/splash_text.gd" id="4_elvel"]
+[ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="1_vxdvs"]
+[ext_resource type="Script" path="res://Scripts/Menus/win_screen.gd" id="2_dowla"]
+[ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_0rkck"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="4_hnnkb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2kw1h"]
-font = ExtResource("3_hlrit")
+font = ExtResource("4_hnnkb")
 font_size = 60
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_krdkk"]
-font = ExtResource("3_hlrit")
+font = ExtResource("4_hnnkb")
 font_size = 30
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_iodlq"]
+font = ExtResource("4_hnnkb")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(1, 1, 1, 1)
+shadow_offset = Vector2(5, 5)
+
 [sub_resource type="Theme" id="Theme_212f5"]
-default_font = ExtResource("3_hlrit")
+default_font = ExtResource("4_hnnkb")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vho5a"]
 
@@ -47,14 +54,14 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6sjj"]
 
-[node name="DeathScreen" type="ColorRect"]
-material = ExtResource("1_a1uhc")
+[node name="WinScreen" type="ColorRect"]
+material = ExtResource("1_vxdvs")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_6vw4v")
+script = ExtResource("2_dowla")
 
 [node name="Background" type="TextureRect" parent="."]
 show_behind_parent = true
@@ -69,10 +76,10 @@ offset_bottom = 138.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_o2bgd")
+texture = ExtResource("3_0rkck")
 expand_mode = 3
 
-[node name="GameOver" type="Label" parent="."]
+[node name="YouWin" type="Label" parent="."]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 5
@@ -83,7 +90,7 @@ offset_top = 96.0
 offset_right = 169.0
 offset_bottom = 139.0
 grow_horizontal = 2
-text = "GAME OVER"
+text = "YOU WIN!"
 label_settings = SubResource("LabelSettings_2kw1h")
 
 [node name="GoodEffort" type="Label" parent="."]
@@ -97,9 +104,26 @@ offset_top = 152.0
 offset_right = 210.0
 offset_bottom = 195.0
 grow_horizontal = 2
-text = "YOU'RE NOT ALLOWED TO PARK THERE."
+text = "Five Stars All Around!"
 label_settings = SubResource("LabelSettings_krdkk")
-script = ExtResource("4_elvel")
+
+[node name="Score" type="Label" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.5
+offset_top = -130.5
+offset_right = 131.5
+offset_bottom = -79.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE:"
+label_settings = SubResource("LabelSettings_iodlq")
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 show_behind_parent = true
