@@ -142,7 +142,7 @@ grow_vertical = 0
 theme = SubResource("Theme_212f5")
 theme_override_constants/separation = 24
 
-[node name="Try Again" type="Button" parent="VBoxContainer"]
+[node name="Play Again" type="Button" parent="VBoxContainer"]
 show_behind_parent = true
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -154,7 +154,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vho5a")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mwmqx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_x8bg8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_51f6o")
-text = "Try AGain"
+text = "Play Again"
 
 [node name="Main Menu" type="Button" parent="VBoxContainer"]
 show_behind_parent = true
@@ -185,6 +185,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_51f6o")
 text = "Exit
 "
 
-[connection signal="pressed" from="VBoxContainer/Try Again" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play Again" to="." method="_on_try_again_pressed"]
 [connection signal="pressed" from="VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
