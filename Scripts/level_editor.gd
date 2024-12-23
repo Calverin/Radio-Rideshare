@@ -3,14 +3,17 @@ extends Node
 var current_tile: Vector2i
 
 var current_level: Level
-var level_data
+var level_data: Array
 var level_length: int
+
+var song_position: float = 0.0
 
 @onready var LOADER = $Loader
 @onready var GROUND = $Level/Ground.mesh
 @onready var HIGHLIGHT: MeshInstance3D = $Level/Highlight
 @onready var OBJECTS = $Level/Objects
 
+var BAR = preload("res://Scenes/bar.tscn")
 var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
 var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
 
@@ -29,12 +32,21 @@ func reload_level() -> void:
 		return
 	print("(Re)Loading level editor with: " + level)
 	current_level = LOADER.load_level(level)
-	
 	var lanes = current_level.lanes
+	var nps = current_level.nps
+	
+	# Load the song and get its length in seconds
+	var song_length: float = $Song.load_song()
+	var proper_length: int = ceil(song_length * float(nps))
+	
+	# Set up UI data
 	$UI/RightSidebar/Container/LevelName.text = current_level.title
 	$UI/RightSidebar/Container/Lanes/Amount.text = str(lanes)
+	$UI/RightSidebar/Container/NPS/Amount.text = str(nps)
 	if (not starting_tile):
 		starting_tile = Vector2i((lanes / 2), 0)
+		
+	# Set ground size
 	GROUND.size.x = lanes * 10
 	GROUND.material.uv1_scale.x = lanes
 	
@@ -42,8 +54,23 @@ func reload_level() -> void:
 	level_data = current_level.data
 	level_length = len(level_data)
 	
+	# Check if there's a mismatch in song length
+	if proper_length > level_length:
+		for i in range(proper_length - level_length):
+			level_data.append("".rpad(lanes, "0"))
+		level_length = proper_length
+		save_level()
+	
 	# Insert initial objects
 	for i in range(level_length):
+		# Bars
+		if (i % current_level.nps == 0):
+			var b = BAR.instantiate()
+			b.position = Vector3(0, 0, i * -10 + 2000)
+			b.mesh.size.x = lanes * 10
+			b.name += str(i / current_level.nps)
+			$Level/Ground.add_child(b)
+		# Objects
 		var line = level_data[i].split()
 		for o in range(len(line)):
 			if line[o] != '0':
@@ -87,6 +114,13 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
 		save_level()
 		get_tree().change_scene_to_file("res://Scenes/Menus/level_selector.tscn")
+	
+	if Input.is_action_just_pressed("toggle_music"):
+		if $Song.playing:
+			song_position = $Song.get_playback_position()
+			$Song.stop()
+		else:
+			$Song.play(song_position)
 
 func insert_object(scene: PackedScene, id: int):
 	# Remove all nodes at that position already:
@@ -97,7 +131,7 @@ func insert_object(scene: PackedScene, id: int):
 			break
 	
 	# Add the new node to the level data
-	print(level_data)
+	#print(level_data)
 	var line = level_data[current_tile.y].split()
 	line[current_tile.x] = str(id)
 	level_data[current_tile.y] = "".join(line)

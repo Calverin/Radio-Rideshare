@@ -18,6 +18,7 @@ func _ready():
 		
 		# Generate the level if this is called on a GridMap
 		if name == "Road":
+			$"../../../Song".load_song()
 			generate_level($"." as GridMap, level_obj)
 
 static func load_level(level_name: String) -> Level:
@@ -27,7 +28,7 @@ static func load_level(level_name: String) -> Level:
 	
 	## Load level
 	var data_string = load_level_data(level_name)
-	print(data_string)
+	#print(data_string)
 	data = data_string.split("\n")
 	for s: String in data:
 		if s.begins_with("#"):

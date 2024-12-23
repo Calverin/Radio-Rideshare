@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://sdo1tlagv5ak"]
+[gd_scene load_steps=16 format=3 uid="uid://xcnagv6x7xhe"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
@@ -40,6 +40,7 @@ size = Vector2(30, 4000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlsxm"]
 transparency = 1
+blend_mode = 3
 albedo_color = Color(1, 0.113725, 0, 0.988235)
 
 [sub_resource type="BoxMesh" id="BoxMesh_iie70"]
