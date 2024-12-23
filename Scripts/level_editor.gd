@@ -112,7 +112,7 @@ func _process(delta: float) -> void:
 		toggle_music()
 	
 	# Scrolling
-	$UI/LeftSidebar/Completion.value = song_position
+	$UI/LeftSidebar/Completion.value = song_position + 1
 	if Input.is_action_just_released("scroll_up"):
 		song_position = min(song_length, song_position + 0.1)
 		current_tile.y = floor(song_position * nps)

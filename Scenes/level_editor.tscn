@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://xcnagv6x7xhe"]
+[gd_scene load_steps=25 format=3 uid="uid://xcnagv6x7xhe"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
@@ -24,27 +24,45 @@ default_font = ExtResource("3_w3ts0")
 
 [sub_resource type="LabelSettings" id="LabelSettings_8sdfj"]
 font_size = 40
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_oh77l"]
 default_font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_ltwhj"]
 font_size = 40
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_eosg0"]
 font_size = 40
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_774y3"]
 default_font = ExtResource("3_w3ts0")
 default_font_size = 38
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7600"]
-bg_color = Color(0, 0.121569, 0.203922, 0.592157)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn46n"]
-bg_color = Color(0.0117647, 0.505882, 0.607843, 0.654902)
+bg_color = Color(0.109804, 0.211765, 0.305882, 0.52549)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn46n"]
+bg_color = Color(0.0117647, 0.505882, 0.607843, 0.384314)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_c3ypo"]
+line_spacing = -2.0
+font_size = 20
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1brni"]
 transparency = 1
@@ -157,9 +175,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -13.5
+offset_top = -14.5
 offset_right = -53.0
-offset_bottom = 18.5
+offset_bottom = 17.5
 grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
@@ -173,9 +191,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -49.0
-offset_top = -13.5
+offset_top = -14.5
 offset_right = -22.0
-offset_bottom = 18.5
+offset_bottom = 17.5
 grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
@@ -203,9 +221,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -17.5
+offset_top = -18.5
 offset_right = -53.0
-offset_bottom = 14.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
@@ -219,9 +237,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -49.0
-offset_top = -17.5
+offset_top = -18.5
 offset_right = -22.0
-offset_bottom = 14.5
+offset_bottom = 13.5
 grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
@@ -236,7 +254,7 @@ offset_top = -280.0
 offset_right = 255.0
 offset_bottom = 280.0
 grow_vertical = 2
-color = Color(0.109804, 0.211765, 0.305882, 0.52549)
+color = Color(0.109804, 0.211765, 0.305882, 0)
 
 [node name="Completion" type="ProgressBar" parent="UI/LeftSidebar"]
 layout_mode = 1
@@ -246,10 +264,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_774y3")
-theme_override_colors/font_color = Color(0.522277, 0.677125, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
 theme_override_styles/background = SubResource("StyleBoxFlat_r7600")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bn46n")
 fill_mode = 3
+
+[node name="TopBar" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 256.0
+offset_bottom = 64.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="1" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "1
+ Tap Note "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="2" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "2
+ Blue Car "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="3" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "3
+ L. Drift "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="4" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "4
+ R. Drift "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="5" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "5
+ End Drift "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
 
 [node name="Level" type="Node3D" parent="."]
 
