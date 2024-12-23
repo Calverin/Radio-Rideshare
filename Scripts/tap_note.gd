@@ -10,7 +10,8 @@ func score(playerbox: Area3D) -> Array:
 	queue_free()
 	return [0, UI.Accuracy.MISS]
 	
+
 func _on_area_exited(_area):
 	if (is_in_group("inside_notes")):
-		UI.reset_scores()
-		queue_free()
+		UI.current_accuracy = UI.Accuracy.MISS
+		remove_from_group("inside_notes")
