@@ -7,7 +7,7 @@ var score: int = 0
 var default_streak: String = "STREAK: "
 var streak: int = 0;
 
-var default_multiplier: String = "  MULTIPLIER: "
+var default_multiplier: String = "     MULTIPLIER: "
 var multiplier: int = 1
 var x: String = "x"
 var colors: Array = [

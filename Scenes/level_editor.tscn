@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://xcnagv6x7xhe"]
+[gd_scene load_steps=25 format=3 uid="uid://xcnagv6x7xhe"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
 [ext_resource type="Texture2D" uid="uid://n705qg6hd6ob" path="res://Assets/Skybox/skybox.exr" id="3_g2rqs"]
+[ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="3_w3ts0"]
 [ext_resource type="Script" path="res://Scripts/song.gd" id="4_flycw"]
 [ext_resource type="Script" path="res://Scripts/Util/level_loader.gd" id="4_qtmvx"]
 
@@ -18,26 +19,80 @@ sky = SubResource("Sky_3wipw")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0tre"]
-albedo_texture = ExtResource("2_o1cen")
-albedo_texture_force_srgb = true
-normal_scale = 8.45
-heightmap_scale = 16.0
-uv1_scale = Vector3(3, 400, 1)
-texture_filter = 0
+[sub_resource type="Theme" id="Theme_0v5qu"]
+default_font = ExtResource("3_w3ts0")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_g2je8"]
-lightmap_size_hint = Vector2i(152, 2002)
-material = SubResource("StandardMaterial3D_x0tre")
-size = Vector2(30, 4000)
+[sub_resource type="LabelSettings" id="LabelSettings_8sdfj"]
+font_size = 40
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_oh77l"]
+default_font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltwhj"]
+font_size = 40
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eosg0"]
+font_size = 40
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_774y3"]
+default_font = ExtResource("3_w3ts0")
+default_font_size = 38
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7600"]
+bg_color = Color(0.109804, 0.211765, 0.305882, 0.52549)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn46n"]
+bg_color = Color(0.0117647, 0.505882, 0.607843, 0.384314)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_c3ypo"]
+line_spacing = -2.0
+font_size = 20
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1brni"]
+transparency = 1
+albedo_color = Color(0, 0.529412, 1, 0.827451)
+
+[sub_resource type="BoxMesh" id="BoxMesh_phsp2"]
+material = SubResource("StandardMaterial3D_1brni")
+size = Vector3(10, 2, 1.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlsxm"]
 transparency = 1
+blend_mode = 3
 albedo_color = Color(1, 0.113725, 0, 0.988235)
 
 [sub_resource type="BoxMesh" id="BoxMesh_iie70"]
 material = SubResource("StandardMaterial3D_xlsxm")
 size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0tre"]
+albedo_texture = ExtResource("2_o1cen")
+albedo_texture_force_srgb = true
+normal_scale = 8.45
+heightmap_scale = 16.0
+uv1_scale = Vector3(3, 1600, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g2je8"]
+lightmap_size_hint = Vector2i(152, 2002)
+material = SubResource("StandardMaterial3D_x0tre")
+size = Vector2(30, 16000)
 
 [node name="LevelEditor" type="Node"]
 script = ExtResource("1_yddgv")
@@ -52,22 +107,239 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_0v5qu")
+
+[node name="RightSidebar" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -413.0
+offset_top = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.109804, 0.211765, 0.305882, 0.52549)
+
+[node name="Container" type="VBoxContainer" parent="UI/RightSidebar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -109.0
+offset_right = 202.5
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="NameHeader" type="Label" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+text = "Level Name"
+label_settings = SubResource("LabelSettings_8sdfj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelName" type="LineEdit" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+theme = SubResource("Theme_oh77l")
+placeholder_text = "Name"
+alignment = 1
+editable = false
+
+[node name="Lanes" type="Label" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+text = "  Lanes :"
+label_settings = SubResource("LabelSettings_8sdfj")
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UI/RightSidebar/Container/Lanes"]
+layout_mode = 0
+offset_left = 257.0
+offset_top = 1.0
+offset_right = 298.0
+offset_bottom = 44.0
+text = "3"
+label_settings = SubResource("LabelSettings_ltwhj")
+
+[node name="Subtract" type="Button" parent="UI/RightSidebar/Container/Lanes"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -14.5
+offset_right = -53.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+text = "-"
+
+[node name="Add" type="Button" parent="UI/RightSidebar/Container/Lanes"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -14.5
+offset_right = -22.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+text = "+"
+
+[node name="NPS" type="Label" parent="UI/RightSidebar/Container"]
+layout_mode = 2
+text = "  NPS :"
+label_settings = SubResource("LabelSettings_8sdfj")
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UI/RightSidebar/Container/NPS"]
+layout_mode = 0
+offset_left = 175.0
+offset_right = 216.0
+offset_bottom = 43.0
+text = "4"
+label_settings = SubResource("LabelSettings_eosg0")
+
+[node name="Subtract" type="Button" parent="UI/RightSidebar/Container/NPS"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -18.5
+offset_right = -53.0
+offset_bottom = 13.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+text = "-"
+
+[node name="Add" type="Button" parent="UI/RightSidebar/Container/NPS"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -18.5
+offset_right = -22.0
+offset_bottom = 13.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+text = "+"
+
+[node name="LeftSidebar" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -280.0
+offset_right = 255.0
+offset_bottom = 280.0
+grow_vertical = 2
+color = Color(0.109804, 0.211765, 0.305882, 0)
+
+[node name="Completion" type="ProgressBar" parent="UI/LeftSidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_774y3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_r7600")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bn46n")
+fill_mode = 3
+
+[node name="TopBar" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 256.0
+offset_bottom = 64.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="1" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "1
+ Tap Note "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="2" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "2
+ Blue Car "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="3" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "3
+ L. Drift "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="4" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "4
+ R. Drift "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
+
+[node name="5" type="Label" parent="UI/TopBar"]
+layout_mode = 2
+text = "5
+ End Drift "
+label_settings = SubResource("LabelSettings_c3ypo")
+horizontal_alignment = 1
 
 [node name="Level" type="Node3D" parent="."]
 
-[node name="Ground" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1995)
-mesh = SubResource("PlaneMesh_g2je8")
+[node name="View" type="Node3D" parent="Level"]
 
-[node name="Highlight" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_iie70")
-
-[node name="Camera" type="Camera3D" parent="Level/Highlight"]
-transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 0, 25, 0)
+[node name="Camera" type="Camera3D" parent="Level/View"]
+transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 0, 26, 0)
 current = true
 
-[node name="Notes" type="Node3D" parent="Level"]
+[node name="PlayBar" type="MeshInstance3D" parent="Level/View"]
+visible = false
+mesh = SubResource("BoxMesh_phsp2")
+skeleton = NodePath("../..")
+
+[node name="Highlight" type="MeshInstance3D" parent="Level/View"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+mesh = SubResource("BoxMesh_iie70")
+skeleton = NodePath("../..")
+
+[node name="Ground" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8000)
+mesh = SubResource("PlaneMesh_g2je8")
+
+[node name="Objects" type="Node3D" parent="Level"]
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4_flycw")

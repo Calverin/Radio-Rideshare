@@ -2,11 +2,13 @@ extends Area3D
 
 var speed: int
 var lanes: int
+var nps: int
 var current_lane: int
 
 var dead: bool = false
 
 var drifting: bool = false
+var honk_time: int = 0
 var drift_time: int = 0
 var drift_on: bool = false
 var drift_score: int = 0
@@ -14,18 +16,55 @@ var drift_direction: float = 0
 var turn_offset: float = 0
 
 func _ready():
-	speed = 50
+	nps = LevelLoader.current_level.nps
 	lanes = LevelLoader.current_level.lanes
-	current_lane = ceil(float(lanes) / 2)
+	current_lane = ceil(float(lanes) / 2.0)
 	position.x = current_lane * 10
+	
+	$"../../UI/Completion".min_value = 0
+	$"../../UI/Completion".max_value = $"../../../Song".stream.get_length()
 
 func _process(delta: float):
-	# Honking
+	## Drifting
+	var wheel_speed = 20
+	$Body/Wheel.rotation_degrees.x += wheel_speed
+	$Body/Wheel2.rotation_degrees.x += wheel_speed
+	$Body/Wheel3.rotation_degrees.x += wheel_speed
+	$Body/Wheel4.rotation_degrees.x += wheel_speed
+	if drifting:
+		drift(delta)
+	else:
+		inputs()
+	if turn_offset != 0:
+		turn_offset = lerpf(turn_offset, 0, delta * 16)
+	
+	## Movement VFX
+	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
+	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) 
+		if abs(turn_offset) < 0.1 else 0.0) - drift_direction, delta * 8)
+
+	## Movement
+	var song_position = $"../../../Song".get_playback_position()
+	$"../../UI/Completion".value = song_position + 1
+	position.x = lerpf(position.x, current_lane * 10, delta * 16)
+	position.z = lerpf(position.z, -song_position * 10.0 * nps, delta * 20)
+	
+	## Honking
 	if (Input.is_action_pressed("honk")):
+		if honk_time == 0:
+			$HonkSound.play()
+		honk_time += 1
+		if honk_time < 10:
+			$Body.position.y = lerpf($Body.position.y, 0.5, delta * 20)
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
 			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
+			$ClapSound.play()
 			break
+	if (Input.is_action_just_released("honk")):
+		honk_time = 0
+	
+	## Drifting
 	if (Input.is_action_pressed("drift_left") or Input.is_action_pressed("drift_right")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_drifts"):
 			drift_scoring(object.score(self))
@@ -47,29 +86,6 @@ func _process(delta: float):
 		$"../..".material.set("shader_parameter/warp_amount", lerpf($"../..".material.get("shader_parameter/warp_amount"), 20, delta))
 		$"../..".material.set("shader_parameter/vignette_intensity", lerpf($"../..".material.get("shader_parameter/vignette_intensity"), 100, delta / 2))
 		$"../..".material.set("shader_parameter/vignette_opacity", lerpf($"../..".material.get("shader_parameter/vignette_opacity"), 1, delta / 4))
-
-func _physics_process(delta: float):
-	## Drifting
-	var wheel_speed = 20
-	$Body/Wheel.rotation_degrees.x += wheel_speed
-	$Body/Wheel2.rotation_degrees.x += wheel_speed
-	$Body/Wheel3.rotation_degrees.x += wheel_speed
-	$Body/Wheel4.rotation_degrees.x += wheel_speed
-	if drifting:
-		drift(delta)
-	else:
-		inputs()
-	if turn_offset != 0:
-		turn_offset = lerpf(turn_offset, 0, delta * 16)
-	
-	## Movement VFX
-	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
-	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) 
-		if abs(turn_offset) < 0.1 else 0.0) - drift_direction, delta * 8)
-
-	## Movement
-	position.x = lerpf(position.x, current_lane * 10, delta * 16)
-	position.z -= speed * delta
 
 # -1 == left, 1 == right
 func drift(delta: float):
@@ -98,6 +114,7 @@ func drift(delta: float):
 		switch_lane(drift_direction)
 		set_drift_graphics("Left", false)
 		set_drift_graphics("Right", false)
+		$DriftSound.stop()
 
 func update_scoring(hit: Array):
 	if (hit[1] != UI.Accuracy.MISS):
@@ -137,11 +154,13 @@ func inputs():
 		drift_direction = -1
 		set_drift_graphics("Left", true)
 		set_drift_graphics("Right", false)
+		$DriftSound.play()
 	elif Input.is_action_just_pressed("drift_right"):
 		drifting = true
 		drift_direction = 1
 		set_drift_graphics("Left", false)
 		set_drift_graphics("Right", true)
+		$DriftSound.play()
 	elif Input.is_action_just_pressed("quick_left"):
 		turn_offset = 0.1
 		switch_lane(-1)
@@ -168,6 +187,8 @@ func _on_area_entered(area: Area3D):
 		print("game over")
 		dead = true
 		speed = 0
+		$CrashSound.play(0.0)
+		$CrashSound.play(3.0)
 		await get_tree().create_timer(1.5, false).timeout
 		get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
 		
