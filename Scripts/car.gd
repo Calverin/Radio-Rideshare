@@ -2,6 +2,7 @@ extends Area3D
 
 var speed: int
 var lanes: int
+var nps: int
 var current_lane: int
 
 var dead: bool = false
@@ -14,12 +15,35 @@ var drift_direction: float = 0
 var turn_offset: float = 0
 
 func _ready():
-	speed = LevelLoader.current_level.nps * 10
+	nps = LevelLoader.current_level.nps
 	lanes = LevelLoader.current_level.lanes
 	current_lane = ceil(float(lanes) / 2.0)
 	position.x = current_lane * 10
 
 func _process(delta: float):
+	## Drifting
+	var wheel_speed = 20
+	$Body/Wheel.rotation_degrees.x += wheel_speed
+	$Body/Wheel2.rotation_degrees.x += wheel_speed
+	$Body/Wheel3.rotation_degrees.x += wheel_speed
+	$Body/Wheel4.rotation_degrees.x += wheel_speed
+	if drifting:
+		drift(delta)
+	else:
+		inputs()
+	if turn_offset != 0:
+		turn_offset = lerpf(turn_offset, 0, delta * 16)
+	
+	## Movement VFX
+	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
+	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) 
+		if abs(turn_offset) < 0.1 else 0.0) - drift_direction, delta * 8)
+
+	## Movement
+	var song_position = $"../../../Song".get_playback_position()
+	position.x = lerpf(position.x, current_lane * 10, delta * 16)
+	position.z = lerpf(position.z, -song_position * 10.0 * nps, delta * 20)
+	
 	# Honking
 	if (Input.is_action_pressed("honk")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
@@ -47,29 +71,6 @@ func _process(delta: float):
 		$"../..".material.set("shader_parameter/warp_amount", lerpf($"../..".material.get("shader_parameter/warp_amount"), 20, delta))
 		$"../..".material.set("shader_parameter/vignette_intensity", lerpf($"../..".material.get("shader_parameter/vignette_intensity"), 100, delta / 2))
 		$"../..".material.set("shader_parameter/vignette_opacity", lerpf($"../..".material.get("shader_parameter/vignette_opacity"), 1, delta / 4))
-
-func _physics_process(delta: float):
-	## Drifting
-	var wheel_speed = 20
-	$Body/Wheel.rotation_degrees.x += wheel_speed
-	$Body/Wheel2.rotation_degrees.x += wheel_speed
-	$Body/Wheel3.rotation_degrees.x += wheel_speed
-	$Body/Wheel4.rotation_degrees.x += wheel_speed
-	if drifting:
-		drift(delta)
-	else:
-		inputs()
-	if turn_offset != 0:
-		turn_offset = lerpf(turn_offset, 0, delta * 16)
-	
-	## Movement VFX
-	$Body.position.y = lerpf($Body.position.y, 0, delta * 20)
-	$Body.rotation.y = lerpf($Body.rotation.y + clampf(turn_offset, -1, 1), $Body.rotation.y - (fmod($Body.rotation.y, (2 * PI)) 
-		if abs(turn_offset) < 0.1 else 0.0) - drift_direction, delta * 8)
-
-	## Movement
-	position.x = lerpf(position.x, current_lane * 10, delta * 16)
-	position.z -= speed * delta
 
 # -1 == left, 1 == right
 func drift(delta: float):

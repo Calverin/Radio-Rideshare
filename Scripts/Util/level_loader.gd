@@ -76,6 +76,7 @@ func generate_level(grid: GridMap, level: Level) -> void:
 		grid.set_cell_item(Vector3i(x + size, 0, z - size), 0, 10)
 		## Objects
 		var objects = level.data[i].split()
+		z = -i * 10
 		for o in range(level.lanes):
 			match objects[o]:
 				'1':
@@ -144,6 +145,6 @@ static func find_level_song(level_name) -> AudioStreamMP3:
 
 func insert_object(obj: PackedScene, z: int, lane: int) -> void:
 	var child: Node3D = obj.instantiate()
-	child.position = Vector3(lane * 10 + 10, child.position.y, z * (size - 1))
+	child.position = Vector3(lane * 10 + 10, child.position.y, z)
 	child.name += " (" + str(lane) + "," + str(z) + ")"
 	$"../Objects".add_child(child)
