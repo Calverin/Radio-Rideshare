@@ -15,7 +15,7 @@ var score: float = 0
 func _ready():
 	speed = 50
 	lanes = LevelLoader.current_level.lanes
-	current_lane = int(float(lanes) / 2.0)
+	current_lane = ceil(float(lanes) / 2.0)
 	position.x = current_lane * 10
 
 func _process(delta: float):

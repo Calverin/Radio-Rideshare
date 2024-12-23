@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://xcnagv6x7xhe"]
+[gd_scene load_steps=24 format=3 uid="uid://xcnagv6x7xhe"]
 
 [ext_resource type="Script" path="res://Scripts/level_editor.gd" id="1_yddgv"]
 [ext_resource type="Texture2D" uid="uid://dfmfgcsa0dqol" path="res://Assets/Tiles/grid.jpg" id="2_o1cen"]
@@ -23,7 +23,28 @@ glow_enabled = true
 default_font = ExtResource("3_w3ts0")
 
 [sub_resource type="LabelSettings" id="LabelSettings_8sdfj"]
-font_size = 20
+font_size = 40
+
+[sub_resource type="Theme" id="Theme_oh77l"]
+default_font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltwhj"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_eosg0"]
+font_size = 40
+
+[sub_resource type="Theme" id="Theme_774y3"]
+default_font = ExtResource("3_w3ts0")
+default_font_size = 38
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7600"]
+bg_color = Color(0, 0.121569, 0.203922, 0.592157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn46n"]
+bg_color = Color(0.0117647, 0.505882, 0.607843, 0.654902)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1brni"]
 transparency = 1
@@ -47,13 +68,13 @@ albedo_texture = ExtResource("2_o1cen")
 albedo_texture_force_srgb = true
 normal_scale = 8.45
 heightmap_scale = 16.0
-uv1_scale = Vector3(3, 400, 1)
+uv1_scale = Vector3(3, 1600, 1)
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g2je8"]
 lightmap_size_hint = Vector2i(152, 2002)
 material = SubResource("StandardMaterial3D_x0tre")
-size = Vector2(30, 4000)
+size = Vector2(30, 16000)
 
 [node name="LevelEditor" type="Node"]
 script = ExtResource("1_yddgv")
@@ -77,20 +98,27 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -255.0
-offset_top = -280.0
-offset_bottom = 280.0
+offset_left = -413.0
+offset_top = -128.0
+offset_bottom = 128.0
 grow_horizontal = 0
 grow_vertical = 2
 color = Color(0.109804, 0.211765, 0.305882, 0.52549)
 
 [node name="Container" type="VBoxContainer" parent="UI/RightSidebar"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -109.0
+offset_right = 202.5
+offset_bottom = 109.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="NameHeader" type="Label" parent="UI/RightSidebar/Container"]
 layout_mode = 2
@@ -101,8 +129,10 @@ vertical_alignment = 1
 
 [node name="LevelName" type="LineEdit" parent="UI/RightSidebar/Container"]
 layout_mode = 2
+theme = SubResource("Theme_oh77l")
 placeholder_text = "Name"
 alignment = 1
+editable = false
 
 [node name="Lanes" type="Label" parent="UI/RightSidebar/Container"]
 layout_mode = 2
@@ -112,11 +142,12 @@ vertical_alignment = 1
 
 [node name="Amount" type="Label" parent="UI/RightSidebar/Container/Lanes"]
 layout_mode = 0
-offset_left = 129.0
-offset_top = 3.0
-offset_right = 169.0
-offset_bottom = 21.0
+offset_left = 257.0
+offset_top = 1.0
+offset_right = 298.0
+offset_bottom = 44.0
 text = "3"
+label_settings = SubResource("LabelSettings_ltwhj")
 
 [node name="Subtract" type="Button" parent="UI/RightSidebar/Container/Lanes"]
 layout_mode = 1
@@ -125,12 +156,13 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -13.0
-offset_right = -32.0
-offset_bottom = 13.0
+offset_left = -80.0
+offset_top = -13.5
+offset_right = -53.0
+offset_bottom = 18.5
 grow_horizontal = 0
 grow_vertical = 2
+focus_mode = 0
 text = "-"
 
 [node name="Add" type="Button" parent="UI/RightSidebar/Container/Lanes"]
@@ -140,12 +172,13 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -13.0
-offset_right = -8.0
-offset_bottom = 13.0
+offset_left = -49.0
+offset_top = -13.5
+offset_right = -22.0
+offset_bottom = 18.5
 grow_horizontal = 0
 grow_vertical = 2
+focus_mode = 0
 text = "+"
 
 [node name="NPS" type="Label" parent="UI/RightSidebar/Container"]
@@ -156,11 +189,11 @@ vertical_alignment = 1
 
 [node name="Amount" type="Label" parent="UI/RightSidebar/Container/NPS"]
 layout_mode = 0
-offset_left = 89.0
-offset_top = 3.0
-offset_right = 129.0
-offset_bottom = 21.0
+offset_left = 175.0
+offset_right = 216.0
+offset_bottom = 43.0
 text = "4"
+label_settings = SubResource("LabelSettings_eosg0")
 
 [node name="Subtract" type="Button" parent="UI/RightSidebar/Container/NPS"]
 layout_mode = 1
@@ -169,12 +202,13 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -13.0
-offset_right = -32.0
-offset_bottom = 13.0
+offset_left = -80.0
+offset_top = -17.5
+offset_right = -53.0
+offset_bottom = 14.5
 grow_horizontal = 0
 grow_vertical = 2
+focus_mode = 0
 text = "-"
 
 [node name="Add" type="Button" parent="UI/RightSidebar/Container/NPS"]
@@ -184,13 +218,38 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -13.0
-offset_right = -8.0
-offset_bottom = 13.0
+offset_left = -49.0
+offset_top = -17.5
+offset_right = -22.0
+offset_bottom = 14.5
 grow_horizontal = 0
 grow_vertical = 2
+focus_mode = 0
 text = "+"
+
+[node name="LeftSidebar" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -280.0
+offset_right = 255.0
+offset_bottom = 280.0
+grow_vertical = 2
+color = Color(0.109804, 0.211765, 0.305882, 0.52549)
+
+[node name="Completion" type="ProgressBar" parent="UI/LeftSidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_774y3")
+theme_override_colors/font_color = Color(0.522277, 0.677125, 1, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_r7600")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bn46n")
+fill_mode = 3
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -202,6 +261,7 @@ current = true
 
 [node name="PlayBar" type="MeshInstance3D" parent="Level/View"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8147e-06, 4)
+visible = false
 mesh = SubResource("BoxMesh_phsp2")
 skeleton = NodePath("../..")
 
@@ -211,7 +271,7 @@ mesh = SubResource("BoxMesh_iie70")
 skeleton = NodePath("../..")
 
 [node name="Ground" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1995)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7995)
 mesh = SubResource("PlaneMesh_g2je8")
 
 [node name="Objects" type="Node3D" parent="Level"]
