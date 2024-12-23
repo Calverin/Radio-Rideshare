@@ -8,6 +8,7 @@ var current_lane: int
 var dead: bool = false
 
 var drifting: bool = false
+var honk_time: int = 0
 var drift_time: int = 0
 var drift_on: bool = false
 var drift_score: int = 0
@@ -19,6 +20,9 @@ func _ready():
 	lanes = LevelLoader.current_level.lanes
 	current_lane = ceil(float(lanes) / 2.0)
 	position.x = current_lane * 10
+	
+	$"../../UI/Completion".min_value = 0
+	$"../../UI/Completion".max_value = $"../../../Song".stream.get_length()
 
 func _process(delta: float):
 	## Drifting
@@ -41,15 +45,26 @@ func _process(delta: float):
 
 	## Movement
 	var song_position = $"../../../Song".get_playback_position()
+	$"../../UI/Completion".value = song_position + 1
 	position.x = lerpf(position.x, current_lane * 10, delta * 16)
 	position.z = lerpf(position.z, -song_position * 10.0 * nps, delta * 20)
 	
-	# Honking
+	## Honking
 	if (Input.is_action_pressed("honk")):
+		if honk_time == 0:
+			$HonkSound.play()
+		honk_time += 1
+		if honk_time < 10:
+			$Body.position.y = lerpf($Body.position.y, 0.5, delta * 20)
 		for object: Area3D in get_tree().get_nodes_in_group("inside_notes"):
 			update_scoring(object.score(self))
 			object.remove_from_group("inside_notes")
+			$ClapSound.play()
 			break
+	if (Input.is_action_just_released("honk")):
+		honk_time = 0
+	
+	## Drifting
 	if (Input.is_action_pressed("drift_left") or Input.is_action_pressed("drift_right")):
 		for object: Area3D in get_tree().get_nodes_in_group("inside_drifts"):
 			drift_scoring(object.score(self))
@@ -99,6 +114,7 @@ func drift(delta: float):
 		switch_lane(drift_direction)
 		set_drift_graphics("Left", false)
 		set_drift_graphics("Right", false)
+		$DriftSound.stop()
 
 func update_scoring(hit: Array):
 	if (hit[1] != UI.Accuracy.MISS):
@@ -138,11 +154,13 @@ func inputs():
 		drift_direction = -1
 		set_drift_graphics("Left", true)
 		set_drift_graphics("Right", false)
+		$DriftSound.play()
 	elif Input.is_action_just_pressed("drift_right"):
 		drifting = true
 		drift_direction = 1
 		set_drift_graphics("Left", false)
 		set_drift_graphics("Right", true)
+		$DriftSound.play()
 	elif Input.is_action_just_pressed("quick_left"):
 		turn_offset = 0.1
 		switch_lane(-1)

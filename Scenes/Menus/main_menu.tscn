@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dda7h8b46rvfn"]
+[gd_scene load_steps=14 format=3 uid="uid://dda7h8b46rvfn"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_bk668"]
 [ext_resource type="Material" uid="uid://e58sm3dscnsb" path="res://Assets/Shaders/crt_shader.material" id="1_w0ku4"]
 [ext_resource type="FontFile" uid="uid://ckg6xhwdilxv" path="res://Assets/Fonts/Starbirl.otf" id="2_0bc8r"]
 [ext_resource type="Texture2D" uid="uid://drht76nnah1j" path="res://Assets/Backgrounds/menu-gradient.jpg" id="3_fqtet"]
+[ext_resource type="AudioStream" uid="uid://d2vkdyp8h4slx" path="res://Assets/Sounds/tv_on.mp3" id="5_drsct"]
+[ext_resource type="AudioStream" uid="uid://cjw26esk3hpus" path="res://Assets/Sounds/tv_off.mp3" id="6_tdcay"]
 
 [sub_resource type="Theme" id="Theme_ttqu0"]
 default_font = ExtResource("2_0bc8r")
@@ -140,6 +142,15 @@ theme_override_constants/shadow_offset_y = 4
 theme_override_fonts/font = ExtResource("2_0bc8r")
 theme_override_font_sizes/font_size = 75
 text = "Radio Rideshare"
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_drsct")
+autoplay = true
+mix_target = 1
+
+[node name="ExitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_tdcay")
+mix_target = 1
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

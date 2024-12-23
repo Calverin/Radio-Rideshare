@@ -326,18 +326,16 @@ transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 
 current = true
 
 [node name="PlayBar" type="MeshInstance3D" parent="Level/View"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8147e-06, 4)
-visible = false
 mesh = SubResource("BoxMesh_phsp2")
 skeleton = NodePath("../..")
 
 [node name="Highlight" type="MeshInstance3D" parent="Level/View"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 mesh = SubResource("BoxMesh_iie70")
 skeleton = NodePath("../..")
 
 [node name="Ground" type="MeshInstance3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7995)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8000)
 mesh = SubResource("PlaneMesh_g2je8")
 
 [node name="Objects" type="Node3D" parent="Level"]

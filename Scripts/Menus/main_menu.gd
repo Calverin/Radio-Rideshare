@@ -41,5 +41,6 @@ func _on_options_button_pressed():
 func _on_exit_button_pressed():
 	transition = 1
 	dimming = true
-	await get_tree().create_timer(0.75, false).timeout
+	$ExitSound.play()
+	await get_tree().create_timer(1.5, false).timeout
 	get_tree().quit()
