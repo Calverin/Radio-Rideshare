@@ -41,3 +41,13 @@ func _process(delta):
 		UI.current_accuracy = Accuracy.NONE
 	else:
 		$NoteHit.self_modulate = Color(1.0, 1.0, 1.0, lerpf($NoteHit.self_modulate.a, 0.0, delta))
+		
+func reset_scores():
+	UI.current_accuracy = UI.Accuracy.MISS
+	UI.streak = 0
+	UI.multiplier = 1
+
+func up_scores(hit):
+	UI.current_accuracy = hit
+	UI.streak += 1
+	UI.multiplier = min(UI.streak / 10 + 1, 4)

@@ -11,6 +11,6 @@ func score(playerbox: Area3D) -> Array:
 	return [0, UI.Accuracy.MISS]
 	
 func _on_area_exited(_area):
-	if (is_in_group("inside_notes")):
+	if (is_in_group("inside_drift_ends")):
 		UI.reset_scores()
 		queue_free()

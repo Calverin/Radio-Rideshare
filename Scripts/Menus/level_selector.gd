@@ -56,8 +56,10 @@ func refresh_level_list():
 		
 func _on_play_level(level_name: String):
 	LevelLoader.current_level_name = level_name
+	material.set("shader_parameter/aberration", 0)
 	get_tree().change_scene_to_file("res://Scenes/world.tscn")
 	
 func _on_edit_level(level_name: String):
 	LevelLoader.current_level_name = level_name
+	material.set("shader_parameter/aberration", 0)
 	get_tree().change_scene_to_file("res://Scenes/level_editor.tscn")
