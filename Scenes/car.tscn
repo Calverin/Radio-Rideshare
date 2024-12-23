@@ -1,18 +1,75 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1klncb1e6jt8"]
+[gd_scene load_steps=16 format=3 uid="uid://c1klncb1e6jt8"]
 
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="2_igjln"]
+[ext_resource type="Material" uid="uid://bd65yxhavqsse" path="res://Assets/Car/sparks_particle_process_material.tres" id="4_6byxu"]
+[ext_resource type="Texture2D" uid="uid://c5wfrtniaeuc7" path="res://Assets/Car/trace_06.png" id="5_uo8a5"]
+[ext_resource type="Texture2D" uid="uid://dbvvboe3msicv" path="res://Assets/Car/light_01.png" id="6_le2vi"]
+[ext_resource type="Texture2D" uid="uid://dua73lp61qxt5" path="res://Assets/Car/trace_03.png" id="7_hwcj3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sruk7"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.994916, 0.682096, 0.350741, 1)
+albedo_texture = ExtResource("5_uo8a5")
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_wnc4q"]
+material = SubResource("StandardMaterial3D_sruk7")
+size = Vector2(2, 2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fmbhs"]
+particle_flag_rotate_y = true
+angle_min = 76.4
+angle_max = 76.4
+direction = Vector3(0, 0.1, 0)
+spread = 12.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6symq"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.792402, 0.553274, 1)
+albedo_texture = ExtResource("6_le2vi")
+disable_receive_shadows = true
+billboard_mode = 1
+billboard_keep_scale = true
+grow = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_pocdv"]
+material = SubResource("StandardMaterial3D_6symq")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24m22"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.999301, 0.891802, 0.791583, 1)
+albedo_texture = ExtResource("7_hwcj3")
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_bfxqe"]
+material = SubResource("StandardMaterial3D_24m22")
+size = Vector2(2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wcon"]
 size = Vector3(2.4, 1.9, 4.5)
 
 [node name="Car" type="Area3D" groups=["player_car"]]
 script = ExtResource("1_oamc2")
-speed = 60
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.77188, 0.635768, 0, -0.635768, 0.77188, 0, 6.70486, 5.96559)
+transform = Transform3D(1, 0, 0, 0, 0.908129, 0.418691, 0, -0.418691, 0.908129, 0, 5.22377, 7.53504)
 current = true
 fov = 95.0
 
@@ -22,20 +79,80 @@ fov = 95.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051, -1.00583e-07)
 
 [node name="Wheel" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.451, -1.375)
+transform = Transform3D(-1, -1.52855e-14, 8.74228e-08, 0, 1, 1.74846e-07, -8.74228e-08, 1.74846e-07, -1, -1, 0.38, -1.375)
 skeleton = NodePath("../..")
 
 [node name="Wheel2" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, -1.375)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.38, -1.375)
 skeleton = NodePath("../..")
 
 [node name="Wheel3" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.451, 1.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.38, 1.5)
 skeleton = NodePath("../..")
 
 [node name="Wheel4" parent="Body" instance=ExtResource("2_igjln")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.451, 1.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0.38, 1.5)
 skeleton = NodePath("../..")
+
+[node name="RightDriftParticles" type="Node3D" parent="Body"]
+transform = Transform3D(-0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.573576, 1.25, -0.01, 2)
+
+[node name="Sparks" type="GPUParticles3D" parent="Body/RightDriftParticles"]
+emitting = false
+amount = 100
+lifetime = 0.5
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = ExtResource("4_6byxu")
+draw_pass_1 = SubResource("QuadMesh_wnc4q")
+
+[node name="Flash" type="GPUParticles3D" parent="Body/RightDriftParticles"]
+emitting = false
+amount = 1
+lifetime = 0.5
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_fmbhs")
+draw_pass_1 = SubResource("QuadMesh_pocdv")
+
+[node name="Streaks" type="GPUParticles3D" parent="Body/RightDriftParticles"]
+emitting = false
+amount = 100
+lifetime = 0.5
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = ExtResource("4_6byxu")
+draw_pass_1 = SubResource("QuadMesh_bfxqe")
+
+[node name="LeftDriftParticles" type="Node3D" parent="Body"]
+transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, -1.25, -0.01, 2)
+
+[node name="Sparks" type="GPUParticles3D" parent="Body/LeftDriftParticles"]
+emitting = false
+amount = 100
+lifetime = 0.5
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = ExtResource("4_6byxu")
+draw_pass_1 = SubResource("QuadMesh_wnc4q")
+
+[node name="Flash" type="GPUParticles3D" parent="Body/LeftDriftParticles"]
+emitting = false
+amount = 1
+lifetime = 0.5
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_fmbhs")
+draw_pass_1 = SubResource("QuadMesh_pocdv")
+
+[node name="Streaks" type="GPUParticles3D" parent="Body/LeftDriftParticles"]
+emitting = false
+amount = 100
+lifetime = 0.5
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = ExtResource("4_6byxu")
+draw_pass_1 = SubResource("QuadMesh_bfxqe")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 1.25, -2.5)
@@ -52,3 +169,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
 shape = SubResource("BoxShape3D_0wcon")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

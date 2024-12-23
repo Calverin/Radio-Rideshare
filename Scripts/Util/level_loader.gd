@@ -8,6 +8,9 @@ var size: int
 var CAR = preload("res://Scenes/car.tscn")
 
 var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
+var DRIFT_LEFT = preload("res://Scenes/Notes/drift_left.tscn")
+var DRIFT_RIGHT = preload("res://Scenes/Notes/drift_right.tscn")
+var DRIFT_RELEASE = preload("res://Scenes/Notes/drift_release.tscn")
 var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
 
 func _ready():
@@ -74,10 +77,18 @@ func generate_level(grid: GridMap, level: Level) -> void:
 		## Objects
 		var objects = level.data[i].split()
 		for o in range(level.lanes):
-			if objects[o] == '1':
-				insert_object(TAP_NOTE, z, o)
-			if objects[o] == '2':
-				insert_object(PARKED_CAR, z, o)
+			match objects[o]:
+				'1':
+					insert_object(TAP_NOTE, z, o)
+				'2':
+					insert_object(PARKED_CAR, z, o)
+				'3':
+					insert_object(DRIFT_LEFT, z, o)
+				'4':
+					insert_object(DRIFT_RIGHT, z, o)
+				'5':
+					insert_object(DRIFT_RELEASE, z, o)
+			
 
 static func load_level_data(file_name: String) -> String:
 	var path = "user://Levels/" + file_name + "/" + file_name + ".rrl"

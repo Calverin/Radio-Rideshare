@@ -17,6 +17,9 @@ var nps: float
 
 var BAR = preload("res://Scenes/bar.tscn")
 var TAP_NOTE = preload("res://Scenes/Notes/tap_note.tscn")
+var DRIFT_LEFT = preload("res://Scenes/Notes/drift_left.tscn")
+var DRIFT_RIGHT = preload("res://Scenes/Notes/drift_right.tscn")
+var DRIFT_RELEASE = preload("res://Scenes/Notes/drift_release.tscn")
 var PARKED_CAR = preload("res://Scenes/Obstacles/parked_car.tscn")
 
 func _ready() -> void:
@@ -147,6 +150,12 @@ func _process(delta: float) -> void:
 		insert_object(TAP_NOTE, 1)
 	if Input.is_action_just_pressed("object_2"):
 		insert_object(PARKED_CAR, 2)
+	if Input.is_action_just_pressed("object_3"):
+		insert_object(DRIFT_LEFT, 3)
+	if Input.is_action_just_pressed("object_4"):
+		insert_object(DRIFT_RIGHT, 4)
+	if Input.is_action_just_pressed("object_5"):
+		insert_object(DRIFT_RELEASE, 5)
 		
 	if Input.is_action_just_pressed("object_clear"):
 		insert_object(null, 0)
