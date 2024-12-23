@@ -4,8 +4,10 @@ var speed: int
 var lanes: int
 var nps: int
 var current_lane: int
+var song_length: float
 
 var dead: bool = false
+var won: bool = false
 
 var drifting: bool = false
 var honk_time: int = 0
@@ -21,8 +23,9 @@ func _ready():
 	current_lane = ceil(float(lanes) / 2.0)
 	position.x = current_lane * 10
 	
+	song_length = $"../../../Song".stream.get_length()
 	$"../../UI/Completion".min_value = 0
-	$"../../UI/Completion".max_value = $"../../../Song".stream.get_length()
+	$"../../UI/Completion".max_value = song_length
 
 func _process(delta: float):
 	## Drifting
@@ -80,10 +83,15 @@ func _process(delta: float):
 	if (drift_on):
 		UI.score += drift_score
 		
+	# Winning
+	if (song_length - song_position < 1):
+		win()
+		
 	# Game Over
 	if dead:
 		$"../..".material.set("shader_parameter/aberration", lerpf($"../..".material.get("shader_parameter/aberration"), 1, delta * 2))
 		$"../..".material.set("shader_parameter/warp_amount", lerpf($"../..".material.get("shader_parameter/warp_amount"), 20, delta))
+	if dead or won:
 		$"../..".material.set("shader_parameter/vignette_intensity", lerpf($"../..".material.get("shader_parameter/vignette_intensity"), 100, delta / 2))
 		$"../..".material.set("shader_parameter/vignette_opacity", lerpf($"../..".material.get("shader_parameter/vignette_opacity"), 1, delta / 4))
 
@@ -195,3 +203,11 @@ func _on_area_entered(area: Area3D):
 func set_drift_graphics(direction: String, active: bool):
 	for child in get_node(NodePath("Body/" + direction + "DriftParticles")).get_children():
 		child.emitting = active
+		
+func win():
+	won = true
+	speed = 0
+	$CrashSound.play(0.0)
+	await get_tree().create_timer(1.5, false).timeout
+	get_tree().change_scene_to_file("res://Scenes/Menus/main_menu.tscn")
+	
