@@ -326,6 +326,7 @@ transform = Transform3D(1, 0, 0, 0, 0.144356, 0.989526, 0, -0.989526, 0.144356, 
 current = true
 
 [node name="PlayBar" type="MeshInstance3D" parent="Level/View"]
+visible = false
 mesh = SubResource("BoxMesh_phsp2")
 skeleton = NodePath("../..")
 
