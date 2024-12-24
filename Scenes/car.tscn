@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://1kpirt3v7k8g" path="res://Assets/Car/car_mini.gltf" id="1_aaytl"]
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oamc2"]
 [ext_resource type="PackedScene" uid="uid://dy5gwgs8wnr7o" path="res://Scenes/car_wheel.tscn" id="2_igjln"]
-[ext_resource type="Material" uid="uid://beav386pcg0l1" path="res://Assets/Car/sparks_particle_process_material.tres" id="4_6byxu"]
+[ext_resource type="Material" uid="uid://bd65yxhavqsse" path="res://Assets/Car/sparks_particle_process_material.tres" id="4_6byxu"]
 [ext_resource type="Texture2D" uid="uid://c5wfrtniaeuc7" path="res://Assets/Car/trace_06.png" id="5_uo8a5"]
 [ext_resource type="Texture2D" uid="uid://dbvvboe3msicv" path="res://Assets/Car/light_01.png" id="6_le2vi"]
 [ext_resource type="Texture2D" uid="uid://dua73lp61qxt5" path="res://Assets/Car/trace_03.png" id="7_hwcj3"]
